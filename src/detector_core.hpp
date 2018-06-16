@@ -27,6 +27,6 @@ template <template <class...> class op, class ...Ts>
 using detected_t = typename detector_t<op, Ts...>::result_type;
 
 template <template <class...> class op, class ...Ts>
-constexpr const static inline bool is_detected_v = detector_t<op, Ts...>{}();
+constexpr const static inline bool is_detected_v = detector_t<op, Ts...>::value;
 } /* nxwheels::concept_check */
 #endif
