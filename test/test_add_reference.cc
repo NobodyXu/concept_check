@@ -11,6 +11,8 @@ struct assert_add_lvalue_ref_t: assert_same<T1, add_lvalue_reference_t<T2>> {};
 template <class T1, class T2>
 struct assert_add_rvalue_ref_t: assert_same<T1, add_rvalue_reference_t<T2>> {};
 
+struct Foo {};
+
 template <class T>
 constexpr void test_add_lvalue_reference_t() noexcept {
     assert_add_lvalue_ref_t<T&, T> a1{};
@@ -57,13 +59,9 @@ template <class T>
 constexpr void test_add_reference() noexcept {
     _test_add_reference<T>();
     _test_add_reference<T*>();
+    _test_add_reference<T Foo::*>();
+    _test_add_reference<T (Foo::*)()>();
 }
-
-struct Foo {
-    int i;
-    void Func() {}
-};
-
 int main() {
     test_add_reference<char>();
     test_add_reference<float>();
