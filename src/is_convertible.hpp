@@ -15,6 +15,6 @@ struct implict_convert_from_right_val_t {
 template <class From, class To>
 constexpr const static inline bool is_implicitly_convertible_v = is_detected_v<implict_convert_from_right_val_t, From, To>;
 template <class From, class To>
-struct is_implicitly_convertible: bool_constant<is_implicitly_convertible_v<From, To>> {};
+using is_implicitly_convertible = detector_t<implict_convert_from_right_val_t, From, To>;
 } /* nxwheels::concept_check */
 #endif
