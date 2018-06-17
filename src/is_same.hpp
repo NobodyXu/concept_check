@@ -8,5 +8,10 @@ template <class T>
 struct is_same<T, T>: true_type {};
 template <class T1, class T2>
 constexpr const static inline bool is_same_v = is_same<T1, T2>::value;
+
+template <class T1, class T2>
+struct assert_same {
+    static_assert(is_same_v<T1, T2>);
+};
 } /* nxwheels::concept_check */
 #endif
