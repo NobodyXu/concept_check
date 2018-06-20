@@ -10,8 +10,12 @@ template <class T1, class T2>
 constexpr const static inline bool is_same_v = is_same<T1, T2>::value;
 
 template <class T1, class T2>
-struct assert_same {
+struct assert_same_t {
     static_assert(is_same_v<T1, T2>);
 };
+template <class T1, class T2>
+void assert_same() noexcept {
+    static_assert(is_same_v<T1, T2>);
+}
 } /* nxwheels::concept_check */
 #endif
