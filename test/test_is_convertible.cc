@@ -6,6 +6,10 @@ struct A {
     A() = default;
     constexpr A(const C&) {}
 };
+struct A1 {
+    A1() = default;
+    constexpr explicit A1(const C&) {}
+};
 struct B {
     constexpr operator A ()       noexcept { return {}; }
     constexpr operator C () const noexcept { return {}; }
@@ -22,7 +26,7 @@ int main() {
     static_assert(is_implicitly_convertible_v<char, int>);
 
     static_assert(is_implicitly_convertible_v<B, A>);
-    static_assert(is_implicitly_convertible_v<const B, A>);
+    static_assert(!is_implicitly_convertible_v<const B, A>);
 
     static_assert(is_implicitly_convertible_v<C, A>);
     static_assert(is_implicitly_convertible_v<const C, A>);
@@ -30,4 +34,9 @@ int main() {
     static_assert(is_implicitly_convertible_v<const B, C>);
 
     static_assert(is_implicitly_convertible_v<D, D>);
+    static_assert(is_implicitly_convertible_v<void, void>);
+
+    static_assert(!is_implicitly_convertible_v<void, int>);
+    static_assert(!is_implicitly_convertible_v<int, A>);
+    static_assert(!is_implicitly_convertible_v<C, A1>);
 }
