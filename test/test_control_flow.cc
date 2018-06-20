@@ -12,6 +12,7 @@ int main() {
     // Test disjunction_t.
     static_assert(std::is_same<disjunction_t<std::false_type, ft, tt>, tt>{}());
     static_assert(std::is_same<disjunction_t<>, false_type>{}());
+    static_assert(std::is_same<disjunction_t<ft>, ft>{}());
 
     // Test else_if_t.
     static_assert(std::is_same<else_if_t<branch<false, void>,
