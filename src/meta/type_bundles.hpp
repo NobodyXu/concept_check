@@ -21,11 +21,13 @@ type_bundles(Tuple<Types...>*) -> type_bundles<Types...>;
 template <class Tuple>
 using type_bundles_t = decltype(type_bundles(as<Tuple*>{}));
 
-template <size_t N, class T>
+template <size_t N, class ...Ts>
 struct type_bundles_element;
 
 template <size_t N, class T, class ...Types>
-struct type_bundles_element<N, type_bundles<T, Types...>>: type_bundles_element<N - 1, type_bundles<Types...>> {};
+struct type_bundles_element<N, type_bundles<T, Types...>> {
+    using type = typename type_bundles_element<N - 1, type_bundles<Types...>>::type;
+};
 
 template <class T, class ...Types>
 struct type_bundles_element<0, type_bundles<T, Types...>> {
