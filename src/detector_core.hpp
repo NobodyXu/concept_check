@@ -28,24 +28,6 @@ template <template <class...> class op, class ...Ts>
 constexpr const static inline bool is_detected_v = detector_t<op, Ts...>::value;
 
 template <template <class...> class op, class ...Ts>
-constexpr void assert_detected() noexcept {
-    static_assert(is_detected_v<op, Ts...>);
-}
-template <template <class...> class op, class ...Ts>
-struct assert_detected_t {
-    static_assert(is_detected_v<op, Ts...>);
-};
-
-template <template <class...> class op, class ...Ts>
-constexpr void assert_not_detected() noexcept {
-    static_assert(!is_detected_v<op, Ts...>);
-}
-template <template <class...> class op, class ...Ts>
-struct assert_not_detected_t {
-    static_assert(!is_detected_v<op, Ts...>);
-};
-
-template <template <class...> class op, class ...Ts>
 using detected_t = typename detector_t<op, Ts...>::result_type;
 
 template <class Default, template <class...> class op, class ...Ts>

@@ -9,8 +9,6 @@ int main() {
     // Test detector_t.
     static_assert(detector_t<dereference, int*>{}());
     static_assert(!detector_t<dereference, int>{}());
-    assert_detected<dereference, int*>();
-    assert_not_detected<dereference, int>();
 
     // Test is_detected.
     static_assert(is_detected<dereference, int*>{}());
