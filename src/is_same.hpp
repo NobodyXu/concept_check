@@ -17,5 +17,14 @@ template <class T1, class T2>
 constexpr void assert_same() noexcept {
     static_assert(is_same_v<T1, T2>);
 }
+
+template <class T1, class T2>
+struct assert_not_same_t {
+    static_assert(!is_same_v<T1, T2>);
+};
+template <class T1, class T2>
+constexpr void assert_not_same() noexcept {
+    static_assert(!is_same_v<T1, T2>);
+}
 } /* nxwheels::concept_check */
 #endif
