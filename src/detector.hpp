@@ -1,7 +1,7 @@
 #ifndef __nobodyxu_concept_check_detector_HPP__
 # define __nobodyxu_concept_check_detector_HPP__
 # include "detector_core.hpp"
-# include "is_same.hpp"
+# include "conceps/is_same.hpp"
 # include "concepts/is_convertible.hpp"
 namespace nxwheels::concept_check {
 template <class Expected, template <class...> class op, class ...Ts>

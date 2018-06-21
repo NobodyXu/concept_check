@@ -1,6 +1,6 @@
 #ifndef __nobodyxu_concept_check_is_same_HPP__
 # define __nobodyxu_concept_check_is_same_HPP__
-# include "integral_constant.hpp"
+# include "../integral_constant.hpp"
 namespace nxwheels::concept_check {
 template <class T1, class T2>
 struct is_same: false_type {};
