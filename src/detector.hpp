@@ -1,29 +1,17 @@
 #ifndef __nobodyxu_concept_check_detector_HPP__
 # define __nobodyxu_concept_check_detector_HPP__
 # include "detector_core.hpp"
-# include "control_flow.hpp"
+# include "is_same.hpp"
+# include "is_convertible.hpp"
 namespace nxwheels::concept_check {
+template <class Expected, template <class...> class op, class ...Ts>
+using is_detected_exact = is_same<Expected, detected_t<op, Ts...>;
+template <class Expected, template <class...> class op, class ...Ts>
+constexpr const static inline bool is_detected_exact_v = is_detected_exact<op, Ts...>::value;
 
-/*
-template< class Default, template<class...> class Op, class... Args >
-using detected_or_t = typename detected_or<Default, Op, Args...>::type;
-(library fundamentals TS v2)
-
-template <class Expected, template<class...> class Op, class... Args>
-using is_detected_exact = is_same<Expected, detected_t<Op, Args...>>;
-(library fundamentals TS v2)
-
-template <class Expected, template<class...> class Op, class... Args>
-constexpr bool is_detected_exact_v = is_detected_exact<Expected, Op, Args...>::value;
-(library fundamentals TS v2)
-
-template <class To, template<class...> class Op, class... Args>
-using is_detected_convertible = is_convertible<detected_t<Op, Args...>, To>;
-(library fundamentals TS v2)
-
-template <class To, template<class...> class Op, class... Args>
-constexpr bool is_detected_convertible_v = is_detected_convertible<To, Op, Args...>::value;
-(library fundamentals TS v2)
- */
+template <class To, template <class...> class op, class ...Ts>
+using is_detected_implicitly_convertible = is_implicitly_convertible<detected_t<op, Ts...>, To>;
+template <class To, template <class...> class op, class ...Ts>
+constexpr const static inline bool is_detected_implicitly_convertible_v = is_detected_implicitly_convertible<To, op, Ts...>::value;
 } /* nxwheels::concept_check */
 #endif
