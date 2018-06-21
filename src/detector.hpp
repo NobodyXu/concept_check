@@ -1,6 +1,7 @@
 #ifndef __nobodyxu_concept_check_detector_HPP__
 # define __nobodyxu_concept_check_detector_HPP__
 # include "detector_core.hpp"
+# include "control_flow.hpp"
 namespace nxwheels::concept_check {
 
 /*
