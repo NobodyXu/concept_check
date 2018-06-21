@@ -13,7 +13,7 @@ struct evaluate {
 };
 template <template <class...> class op, class ...Ts>
 struct evaluate<delay<op, Ts...>> {
-    using type = op<Ts...>;
+    using type = op<typename evaluate<Ts>::type...>;
 };
 template <class T> using evaluate_t = typename evaluate<T>::type;
 } /* nxwheels::concept_check */
