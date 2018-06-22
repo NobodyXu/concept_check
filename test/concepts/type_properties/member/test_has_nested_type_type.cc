@@ -1,5 +1,5 @@
-#include "../../src/is_same.hpp"
-#include "../../src/concepts/has_nested_type_type.hpp"
+#include "../../../../src/concepts/is_same.hpp"
+#include "../../../../src/concepts/type_properties/member/has_nested_type_type.hpp"
 using namespace nxwheels::concept_check;
 
 struct A {
