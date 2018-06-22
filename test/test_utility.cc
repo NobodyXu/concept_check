@@ -1,12 +1,13 @@
-#include <type_traits>
 #include "../src/utility.hpp"
+#include "../src/concepts/is_same.hpp"
+#include "../src/concepts/is_reference.hpp"
 using namespace nxwheels::concept_check;
 
 struct Foo {};
 
 template <class T, class _T>
 void test_callee_example(_T &&) noexcept {
-    static_assert(std::is_same<T, _T>{}());
+    assert_same<T, _T>();
 }
 template <class T>
 void test_caller_example(T &&t) noexcept {
@@ -28,6 +29,25 @@ void test() noexcept {
     _test<T (Foo::*)()>();
 }
 int main() {
-    typedef void (*fp)();
-    fp parray[] = {&test<char>, &test<int>, &test<Foo>, &_test<void*>};
+    // Test forward.
+    {
+        typedef void (*fp)();
+        fp parray[] = {&test<char>, &test<int>, &test<Foo>, &_test<void*>};
+    }
+
+    // Test move.
+    {
+        int i;
+
+        assert_same<decltype(move(int{})), int&&>();
+        assert_same<decltype(move(i)), int&&>();
+    }
+
+    // Test as_const.
+    {
+        int i;
+
+        assert_same<decltype(as_const(int{0})), const int&&>();
+        assert_same<decltype(as_const(i)), const int&>();
+    }
 }
