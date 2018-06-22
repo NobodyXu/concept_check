@@ -1,5 +1,5 @@
 #include <utility>
-#include "../src/is_same.hpp"
+#include "../src/concepts/is_same.hpp"
 #include "../src/detector_core.hpp"
 using namespace nxwheels::concept_check;
 

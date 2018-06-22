@@ -1,4 +1,4 @@
-#include "../src/is_same.hpp"
+#include "../src/concepts/is_same.hpp"
 #include "../src/delay.hpp"
 using namespace nxwheels::concept_check;
 
