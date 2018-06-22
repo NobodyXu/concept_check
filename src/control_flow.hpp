@@ -9,7 +9,7 @@
 
 # include "detector_core.hpp"
 # include "delay.hpp"
-# include "concepts/has_nested_type_type.hpp"
+# include "concepts/type_properties/member/has_nested_type_type.hpp"
 
 namespace nxwheels::concept_check {
 template <bool condition, class when_True, class when_False>
