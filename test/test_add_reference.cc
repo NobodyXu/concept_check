@@ -34,19 +34,19 @@ constexpr void test_add_lvalue_reference_t() noexcept {
 template <class T>
 constexpr void test_add_rvalue_reference_t() noexcept {
     assert_add_rvalue_ref_t<T&&, T> a1{};
-    assert_add_rvalue_ref_t<T&&, T&> a2{};
+    assert_add_rvalue_ref_t<T&, T&> a2{};
     assert_add_rvalue_ref_t<T&&, T&&> a3{};
 
     assert_add_rvalue_ref_t<const T&&, const T> a4{};
-    assert_add_rvalue_ref_t<const T&&, const T&> a5{};
+    assert_add_rvalue_ref_t<const T&, const T&> a5{};
     assert_add_rvalue_ref_t<const T&&, const T&&> a6{};
 
     assert_add_rvalue_ref_t<volatile T&&, volatile T> a7{};
-    assert_add_rvalue_ref_t<volatile T&&, volatile T&> a8{};
+    assert_add_rvalue_ref_t<volatile T&, volatile T&> a8{};
     assert_add_rvalue_ref_t<volatile T&&, volatile T&&> a9{};
 
     assert_add_rvalue_ref_t<const volatile T&&, const volatile T> a10{};
-    assert_add_rvalue_ref_t<const volatile T&&, const volatile T&> a11{};
+    assert_add_rvalue_ref_t<const volatile T&, const volatile T&> a11{};
     assert_add_rvalue_ref_t<const volatile T&&, const volatile T&&> a12{};
 }
 

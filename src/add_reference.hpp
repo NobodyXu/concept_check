@@ -17,10 +17,6 @@ struct add_rvalue_reference {
     typedef T&& type;
 };
 template <class T>
-struct add_rvalue_reference<T&> {
-    typedef T&& type;
-};
-template <class T>
 using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
 } /* nxwheels::concept_check */
 #endif
