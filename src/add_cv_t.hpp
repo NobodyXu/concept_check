@@ -1,5 +1,5 @@
-#ifndef __nobodyxu_concept_check_add_cv_HPP__
-# define __nobodyxu_concept_check_add_cv_HPP__
+#ifndef __nobodyxu_concept_check_add_cv_t_HPP__
+# define __nobodyxu_concept_check_add_cv_t_HPP__
 namespace nxwheels::concept_check {
 template <class T>
 using add_const_t = const T;
