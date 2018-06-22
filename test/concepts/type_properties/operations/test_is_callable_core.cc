@@ -1,6 +1,6 @@
 #include <tuple>
-#include "../../src/is_same.hpp"
-#include "../../src/concepts/is_callable_core.hpp"
+#include "../../../../src/concepts/is_same.hpp"
+#include "../../../../src/concepts/type_properties/operations/is_callable_core.hpp"
 using namespace nxwheels::concept_check;
 
 void function() {}
@@ -44,13 +44,13 @@ int main() {
     static_assert(is_callable_v<const convert_callable2>);
 
     // Test callable_result_t.
-    std::tuple<assert_same<callable_result_t<void (*)()>, void>,
-               assert_same<callable_result_t<int (*)()>, int>,
-               assert_same<callable_result_t<int (*)(int), int>, int>,
-               assert_same<callable_result_t<functor1>, void>,
-               assert_same<callable_result_t<functor2>, int>,
-               assert_same<callable_result_t<decltype(lambda1)>, void>,
-               assert_same<callable_result_t<decltype(lambda2)>, int>,
-               assert_same<callable_result_t<convert_callable1>, void>,
-               assert_same<callable_result_t<convert_callable3>, int>   > tuple{};
+    std::tuple<assert_same_t<callable_result_t<void (*)()>, void>,
+               assert_same_t<callable_result_t<int (*)()>, int>,
+               assert_same_t<callable_result_t<int (*)(int), int>, int>,
+               assert_same_t<callable_result_t<functor1>, void>,
+               assert_same_t<callable_result_t<functor2>, int>,
+               assert_same_t<callable_result_t<decltype(lambda1)>, void>,
+               assert_same_t<callable_result_t<decltype(lambda2)>, int>,
+               assert_same_t<callable_result_t<convert_callable1>, void>,
+               assert_same_t<callable_result_t<convert_callable3>, int>   > tuple{};
 }

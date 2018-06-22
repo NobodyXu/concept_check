@@ -1,4 +1,4 @@
-#include "../../src/concepts/is_convertible.hpp"
+#include "../../../../src/concepts/type_properties/operations/is_convertible.hpp"
 using namespace nxwheels::concept_check;
 
 struct C {};

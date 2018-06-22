@@ -1,7 +1,7 @@
-#ifndef __nobodyxu_concept_check_concepts_is_callable_core_HPP__
-# define __nobodyxu_concept_check_concepts_is_callable_core_HPP__
-# include "../utility.hpp"
-# include "../detector_core.hpp"
+#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_callable_core_HPP__
+# define __nobodyxu_concept_check_concepts_type_properties_operations_is_callable_core_HPP__
+# include "../../../utility.hpp"
+# include "../../../detector_core.hpp"
 namespace nxwheels::concept_check {
 template <class T, class ...Args>
 using operator_call = decltype( (declval<T>())(decl_as<Args>()...) );
