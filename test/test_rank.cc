@@ -17,6 +17,7 @@ int main() {
     // Test rank_v.
     static_assert(rank_v<int> == 0);
     static_assert(rank_v<int[]> == 1);
+    static_assert(rank_v<const volatile int[]> == 1);
     {
         static_assert(rank_v<int[2][3]> == 2);
         using type = int[2];
