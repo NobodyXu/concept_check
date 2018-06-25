@@ -26,4 +26,7 @@ int main() {
     }
     static_assert(rank_v<A[]> == 1);
     static_assert(rank_v<B[]> == 2);
+
+    static_assert(rank_v<const volatile A[]> == 1);
+    static_assert(rank_v<const volatile B[]> == 2);
 }
