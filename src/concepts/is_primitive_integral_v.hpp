@@ -8,11 +8,6 @@ template <class T> constexpr const static inline bool is_primitive_integral_v = 
 template <>        constexpr const static inline bool is_primitive_integral_v< type > = true;
 # define DEF_SP_INT(type) DEF_SP(unsigned type); DEF_SP(signed type)
 
-DEF_SP(char);
-DEF_SP(char16_t);
-DEF_SP(char32_t);
-DEF_SP(wchar_t);
-
 DEF_SP_INT(char);
 DEF_SP_INT(short int);
 DEF_SP_INT(int);
