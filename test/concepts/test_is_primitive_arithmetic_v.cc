@@ -2,6 +2,9 @@
 using namespace nxwheels::concept_check;
 
 int main() {
+    static_assert(!is_primitive_arithmetic_v<char*>);
+    static_assert(!is_primitive_arithmetic_v<void>);
+
     static_assert(is_primitive_arithmetic_v<char>);
     static_assert(is_primitive_arithmetic_v<char16_t>);
     static_assert(is_primitive_arithmetic_v<char32_t>);
