@@ -1,6 +1,6 @@
-#ifndef __nobodyxu_concept_check_concepts_is_const_HPP__
-# define __nobodyxu_concept_check_concepts_is_const_HPP__
-# include "../integral_constant.hpp"
+#ifndef __nobodyxu_concept_check_concepts_type_properties_is_const_HPP__
+# define __nobodyxu_concept_check_concepts_type_properties_is_const_HPP__
+# include "../../integral_constant.hpp"
 namespace nxwheels::concept_check {
 template <class T> struct is_const:          false_type {};
 template <class T> struct is_const<const T>: true_type {};

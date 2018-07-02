@@ -1,4 +1,4 @@
-#include "../../src/concepts/is_const.hpp"
+#include "../../../src/concepts/type_properties/is_const.hpp"
 using namespace nxwheels::concept_check;
 
 int main() {
