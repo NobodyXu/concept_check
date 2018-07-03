@@ -50,6 +50,8 @@ int main() {
     static_assert(is_direct_constructible_v<wrapper_over_aggregate, int, char>);
     // Aggregate
     static_assert(!is_direct_constructible_v<Aggregate, int, char>);
+    // std::initializer_list
+    static_assert(is_direct_constructible_v<initializer_list_constructible, std::initializer_list<int>>);
 
     // Test is_nothrow_direct_constructiable_v.
     static_assert(!is_nothrow_direct_constructible_v<A, int>);
@@ -68,11 +70,14 @@ int main() {
     static_assert(is_list_constructible_v<Aggregate, int>);
     // cp
     static_assert(is_list_constructible_v<int, int>);
+    static_assert(is_list_constructible_v<Aggregate, Aggregate>);
+    static_assert(is_list_constructible_v<A, A>);
     // 2 argument
     static_assert(is_list_constructible_v<Aggregate, int, char>);
     static_assert(is_list_constructible_v<wrapper_over_aggregate, int, char>);
     // initialier_list
     static_assert(is_list_constructible_v<initializer_list_constructible, int, int, int>);
+    static_assert(is_list_constructible_v<initializer_list_constructible, int, int, char>);
 
     // Test is_nothrow_list_constructiable_v.
     static_assert(is_nothrow_list_constructible_v<Aggregate>);
@@ -84,6 +89,8 @@ int main() {
     static_assert(is_nothrow_list_constructible_v<C, int>);
     // cp
     static_assert(is_nothrow_list_constructible_v<int, int>);
+    static_assert(is_nothrow_list_constructible_v<Aggregate, Aggregate>);
+    static_assert(is_nothrow_list_constructible_v<A, A>);
     // initializer_list
     static_assert(!is_nothrow_list_constructible_v<initializer_list_constructible, int, int, int>);
     static_assert(is_nothrow_list_constructible_v<nothrow_initializer_list_constructible, int, int, int>);
