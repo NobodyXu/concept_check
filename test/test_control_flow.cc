@@ -18,10 +18,16 @@ int main() {
     assert_same<if_t<0, delay<as_origin, int>, delay<as_origin, char>>, char>();
     assert_same<if_t<1, delay<as_origin, char>, delay<as_origin, int>>, char>();
 
+    // Test conjunction_t.
+    assert_same<conjunction_t<>, true_type>();
+    assert_same<conjunction_t<ft>, ft>();
+    assert_same<conjunction_t<false_type, ft, tt>, false_type>();
+    assert_same<conjunction_t<true_type, tt, tt>, tt>();
+
     // Test disjunction_t.
-    assert_same<disjunction_t<false_type, ft, tt>, tt>();
     assert_same<disjunction_t<>, false_type>();
     assert_same<disjunction_t<ft>, ft>();
+    assert_same<disjunction_t<false_type, ft, tt>, tt>();
 
     // Test else_if_t.
     assert_same<
