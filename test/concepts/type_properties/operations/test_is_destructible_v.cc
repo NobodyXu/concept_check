@@ -14,20 +14,6 @@ struct undestructible {
 };
 struct incomplete_type;
 
-namespace test_friend {
-struct friend_t;
-
-struct friend_destructible {
-    friend void friend_f();
-    friend friend_t;
-private:
-    ~friend_destructible() = default;
-};
-
-void friend_f() { friend_destructible{}; }
-struct friend_t {};
-} /* test_friend */
-
 int main() {
     static_assert(is_destructible_v<int>);
     static_assert(is_destructible_v<int*>);
