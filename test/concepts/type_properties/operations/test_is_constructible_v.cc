@@ -6,31 +6,25 @@ struct A {
     A(int) {}
     A(const A&) = default;
 };
-
 struct B {
     B() = default;
     B(int) {}
     ~B() = delete;
 };
-
 struct C {
     C(int) noexcept {}
 };
-
 struct Aggregate {
     int i;
     char c;
 };
-
 struct wrapper_over_aggregate {
     Aggregate a;
     wrapper_over_aggregate(int, char);
 };
-
 struct initializer_list_constructible {
     initializer_list_constructible(std::initializer_list<int> il) {}
 };
-
 struct nothrow_initializer_list_constructible {
     nothrow_initializer_list_constructible(std::initializer_list<int> il) noexcept {}
 };
@@ -92,6 +86,20 @@ int main() {
     static_assert(is_nothrow_list_constructible_v<Aggregate, Aggregate>);
     static_assert(is_nothrow_list_constructible_v<A, A>);
     // initializer_list
-    static_assert(!is_nothrow_list_constructible_v<initializer_list_constructible, int, int, int>);
-    static_assert(is_nothrow_list_constructible_v<nothrow_initializer_list_constructible, int, int, int>);
+    static_assert(!is_nothrow_list_constructible_v<initializer_list_constructible, int, int, int, char>);
+    static_assert(is_nothrow_list_constructible_v<nothrow_initializer_list_constructible, int, int, int, char>);
+
+    // Test is_initializer_list_constructible_v.
+    static_assert(!is_initializer_list_constructible_v<int, int>);
+
+    static_assert(is_initializer_list_constructible_v<std::initializer_list<int>>);
+    static_assert(is_initializer_list_constructible_v<std::initializer_list<int>, int, char>);
+    static_assert(is_initializer_list_constructible_v<initializer_list_constructible>);
+    static_assert(is_initializer_list_constructible_v<initializer_list_constructible, int, char>);
+
+    // Test is_nothrow_initializer_list_constructible_v.
+    static_assert(!is_nothrow_initializer_list_constructible_v<int, int>);
+
+    static_assert(is_nothrow_initializer_list_constructible_v<nothrow_initializer_list_constructible>);
+    static_assert(is_nothrow_initializer_list_constructible_v<nothrow_initializer_list_constructible, int, char>);
 }
