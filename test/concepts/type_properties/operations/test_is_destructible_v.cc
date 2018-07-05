@@ -15,6 +15,7 @@ struct undestructible {
 struct incomplete_type;
 
 int main() {
+    // Test is_destructible_v.
     static_assert(is_destructible_v<int>);
     static_assert(is_destructible_v<int*>);
     static_assert(is_destructible_v<S>);
@@ -22,4 +23,12 @@ int main() {
 
     static_assert(!is_destructible_v<undestructible>);
     static_assert(!is_destructible_v<incomplete_type>);
+
+    // Test is_nothrow_destructible_v.
+    static_assert(is_nothrow_destructible_v<int>);
+    static_assert(is_nothrow_destructible_v<S>);
+    static_assert(is_nothrow_destructible_v<U>);
+
+    static_assert(!is_nothrow_destructible_v<undestructible>);
+    static_assert(!is_nothrow_destructible_v<incomplete_type>);
 }
