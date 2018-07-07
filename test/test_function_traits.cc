@@ -18,6 +18,8 @@ constexpr void _assert_function_traits() noexcept {
     static_assert(func_t::is_volatile_qualified_v == is_volatile_qualified);
     static_assert(func_t::is_lvalue_reference_qualified_v == is_lvalue_reference_qualified);
     static_assert(func_t::is_rvalue_reference_qualified_v == is_rvalue_reference_qualified);
+    static_assert(func_t::is_cvref_qualified_v == is_const_qualified || is_volatile_qualified || is_lvalue_reference_qualified || is_rvalue_reference_qualified);
+
     static_assert(func_t::is_noexcept_qualified_v == is_noexcept);
 
     assert_same<typename func_t::add_pointer_t, add_pointer>();

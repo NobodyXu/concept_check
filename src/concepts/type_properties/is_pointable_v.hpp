@@ -3,11 +3,8 @@
 
 # include "../../detector_core.hpp"
 
-namespace nxwheels::concept_check::is_point_impl {
-template <class T> using p_t = T*;
-} /* nxwheels::concept_check::is_point_impl */
-
 namespace nxwheels::concept_check {
-template <class T> constexpr const static inline bool is_pointable_v = is_detected_v<is_point_impl::p_t, T>;
+template <class T> using pointer_t = T*;
+template <class T> constexpr const static inline bool is_pointable_v = is_detected_v<pointer_t, T>;
 } /* nxwheels::concept_check */
 #endif

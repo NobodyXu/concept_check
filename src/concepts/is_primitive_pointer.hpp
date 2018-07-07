@@ -1,6 +1,8 @@
 #ifndef __nobodyxu_concept_check_concepts_is_primitive_pointer_HPP__
 # define __nobodyxu_concept_check_concepts_is_primitive_pointer_HPP__
+
 # include "../integral_constant.hpp"
+
 namespace nxwheels::concept_check {
 template <class T>          struct is_primitive_pointer:         false_type {};
 template <class T>          struct is_primitive_pointer<T*>:     true_type {};

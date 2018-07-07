@@ -16,8 +16,9 @@ template <class T> constexpr const static inline bool is_trivially_default_const
 /*!
  * @ tparm T T should be a non-reference type.
  */
-template <class T, class ...Args> struct is_trivially_direct_constructible:                           bool_constant<__is_trivially_constructible(T, Args...)> {};
-template <class T>                struct is_trivially_direct_constructible<T>:                        bool_constant<is_trivially_default_constructible_v<T>> {};
+template <class T, class ...Args> struct is_trivially_direct_constructible:    bool_constant<__is_trivially_constructible(T, Args...)> {};
+template <class T>                struct is_trivially_direct_constructible<T>: bool_constant<is_trivially_default_constructible_v<T>>  {};
+
 template <class T, class ...Args> constexpr const static inline bool is_trivially_direct_constructible_v = is_trivially_direct_constructible<T, Args...>::value;
 } /* nxwheels::concept_check */
 #endif

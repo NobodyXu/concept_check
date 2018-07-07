@@ -1,6 +1,8 @@
 #ifndef __nobodyxu_concept_check_remove_extent_HPP__
 # define __nobodyxu_concept_check_remove_extent_HPP__
+
 # include "usefull_types.hpp"
+
 namespace nxwheels::concept_check {
 template <class T>           struct remove_extent       { using type = T; };
 template <class T>           struct remove_extent<T[]>  { using type = T; };

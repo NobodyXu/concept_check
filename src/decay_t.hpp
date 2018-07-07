@@ -1,8 +1,8 @@
 #ifndef __nobodyxu_concept_check_decay_t_HPP__
 # define __nobodyxu_concept_check_decay_t_HPP__
 
-# include "utility.hpp"
 # include "function_traits.hpp"
+# include "utility.hpp"
 
 namespace nxwheels::concept_check::decay_impl {
 template <class T, bool _is_function = is_function_v<T>>
