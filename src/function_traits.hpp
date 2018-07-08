@@ -13,8 +13,6 @@ struct function_traits {
     constexpr const static inline bool is_cvref_qualified_v = false;
 
     constexpr const static inline bool is_noexcept_qualified_v = false;
-
-    using add_pointer_t = T*;
 };
 
 // The basic scenrio.
