@@ -5,6 +5,6 @@
 
 namespace nxwheels {
 template <class T> using member_MEMBER_TYPE_t = typename T::MEMBER_TYPE;
-template <class T> has_member_MEMBER_TYPE_v = is_detected_v<member_MEMBER_TYPE_t, T>;
+template <class T> constexpr const static inline bool has_member_MEMBER_TYPE_v = is_detected_v<member_MEMBER_TYPE_t, T>;
 } /* nxwheels */
 #endif
