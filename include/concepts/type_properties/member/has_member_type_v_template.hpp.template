@@ -1,0 +1,10 @@
+#ifndef __nobodyxu_concept_check_concepts_type_properties_member_has_MEMBER_TYPE_v_HPP__
+# define __nobodyxu_concept_check_concepts_type_properties_member_has_MEMBER_TYPE_v_HPP__
+
+# include "../../../detector_core.hpp"
+
+namespace nxwheels {
+template <class T> using member_MEMBER_TYPE_t = typename T::MEMBER_TYPE;
+template <class T> has_member_MEMBER_TYPE_v = is_detected_v<member_MEMBER_TYPE_t, T>;
+} /* nxwheels */
+#endif
