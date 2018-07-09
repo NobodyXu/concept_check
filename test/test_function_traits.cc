@@ -1,6 +1,6 @@
-#include "../src/function_traits.hpp"
-#include "../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/function_traits.hpp"
+#include "../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 template <bool is_const_qualified,
           bool is_volatile_qualified,

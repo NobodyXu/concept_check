@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 struct Foo {};
 

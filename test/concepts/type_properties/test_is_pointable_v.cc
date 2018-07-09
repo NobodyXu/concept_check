@@ -1,5 +1,5 @@
-#include "../../../src/concepts/type_properties/is_pointable_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../include/concepts/type_properties/is_pointable_v.hpp"
+using namespace nxwheels;
 
 struct S {};
 union U {};

@@ -1,6 +1,6 @@
 #include <type_traits>
-#include "../src/add_reference.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/add_reference.hpp"
+using namespace nxwheels;
 
 template <class T1, class T2>
 struct assert_same {

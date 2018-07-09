@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_class_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_class_v.hpp"
+using namespace nxwheels;
 
 enum unscoped_e {};
 enum class scoped_e {};

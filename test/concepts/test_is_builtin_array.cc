@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_builtin_array.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_builtin_array.hpp"
+using namespace nxwheels;
 
 int main() {
     static_assert(!is_builtin_array_v<int>);

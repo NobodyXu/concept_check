@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_primitive_pointer.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_primitive_pointer.hpp"
+using namespace nxwheels;
 
 struct A {
     int i;

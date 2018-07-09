@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_primitive_arithmetic_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_primitive_arithmetic_v.hpp"
+using namespace nxwheels;
 
 int main() {
     static_assert(!is_primitive_arithmetic_v<char*>);

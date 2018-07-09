@@ -1,5 +1,5 @@
-#include "../../../../src/concepts/type_properties/operations/is_dereferenceable_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/type_properties/operations/is_dereferenceable_v.hpp"
+using namespace nxwheels;
 
 struct S {};
 struct S0 {

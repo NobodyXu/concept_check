@@ -1,6 +1,6 @@
-#include "../src/concepts/is_same.hpp"
-#include "../src/delay.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/concepts/is_same.hpp"
+#include "../include/delay.hpp"
+using namespace nxwheels;
 
 template <class T>
 using as_itself = T;

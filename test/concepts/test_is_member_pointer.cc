@@ -1,6 +1,6 @@
-#include "../../src/concepts/is_member_pointer.hpp"
-#include "../../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_member_pointer.hpp"
+#include "../../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 struct A {
     int i;

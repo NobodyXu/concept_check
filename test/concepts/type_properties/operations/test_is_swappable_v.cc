@@ -13,8 +13,8 @@ void swap(U&&, S&&) {}
 void swap(U&, S&&) noexcept {}
 void swap(S&&, U&) noexcept {}
 
-#include "../../../../src/concepts/type_properties/operations/is_swappable_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/type_properties/operations/is_swappable_v.hpp"
+using namespace nxwheels;
 template <class T> constexpr const static inline bool Is_swappable_v = is_swappable_with_v<T, T>;
 template <class T> constexpr const static inline bool Is_nothrow_swappable_v = is_nothrow_swappable_with_v<T, T>;
 

@@ -1,5 +1,5 @@
-#include "../../../../src/concepts/type_properties/operations/is_LessThanComparable_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/type_properties/operations/is_LessThanComparable_v.hpp"
+using namespace nxwheels;
 
 struct Boolean {
     bool b;

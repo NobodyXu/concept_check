@@ -1,6 +1,6 @@
 #include <type_traits>
-#include "../src/integral_constant.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/integral_constant.hpp"
+using namespace nxwheels;
 
 template <class T, T val>
 constexpr void test_integral_constant() noexcept {

@@ -1,6 +1,6 @@
 #include <type_traits>
-#include "../src/remove_reference.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/remove_reference.hpp"
+using namespace nxwheels;
 
 struct Foo {};
 

@@ -1,7 +1,7 @@
 #include <utility>
-#include "../src/concepts/is_same.hpp"
-#include "../src/detector_core.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/concepts/is_same.hpp"
+#include "../include/detector_core.hpp"
+using namespace nxwheels;
 
 template <class T>
 using dereference = decltype(*std::declval<T>());

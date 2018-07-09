@@ -1,6 +1,6 @@
-#include "../src/remove_extent.hpp"
-#include "../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/remove_extent.hpp"
+#include "../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 int main() {
     // Test remove_extent_t.

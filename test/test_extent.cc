@@ -1,5 +1,5 @@
-#include "../src/extent.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/extent.hpp"
+using namespace nxwheels;
 
 struct A {
     constexpr const static inline size_t extent = 1;

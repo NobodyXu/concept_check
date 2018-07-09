@@ -1,7 +1,7 @@
 #include <tuple>
 namespace test {
-#include "../../src/meta/type_bundles.hpp"
-using namespace nxwheels::concept_check::meta;
+#include "../../include/meta/type_bundles.hpp"
+using namespace nxwheels::meta;
 } /* test */
 
 int main() {

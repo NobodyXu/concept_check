@@ -1,6 +1,6 @@
-#include "../src/rank.hpp"
-#include "../src/usefull_types.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/rank.hpp"
+#include "../include/usefull_types.hpp"
+using namespace nxwheels;
 
 struct A {
     constexpr const static inline size_t rank = 0;

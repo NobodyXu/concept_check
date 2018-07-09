@@ -1,5 +1,5 @@
-#include "../../src/concepts/is_union_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../include/concepts/is_union_v.hpp"
+using namespace nxwheels;
 
 struct S {};
 union U {

@@ -1,6 +1,6 @@
-#include "../src/decay_t.hpp"
-#include "../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/decay_t.hpp"
+#include "../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 int main() {
     // Test decay_t against the 3 rules of decay_t.

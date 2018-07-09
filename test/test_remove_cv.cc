@@ -1,6 +1,6 @@
-#include "../src/remove_cv.hpp"
-#include "../src/concepts/is_same.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/remove_cv.hpp"
+#include "../include/concepts/is_same.hpp"
+using namespace nxwheels;
 
 int main() {
     assert_same<remove_const_t<int>, int>();

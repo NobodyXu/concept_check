@@ -1,7 +1,7 @@
 #include <tuple>
-#include "../../../../src/concepts/is_same.hpp"
-#include "../../../../src/concepts/type_properties/operations/is_callable_core.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/is_same.hpp"
+#include "../../../../include/concepts/type_properties/operations/is_callable_core.hpp"
+using namespace nxwheels;
 
 void function() {}
 int function2() { return 1; }

@@ -1,5 +1,5 @@
-#include "../../../../src/concepts/type_properties/operations/is_self_incrementable_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/type_properties/operations/is_self_incrementable_v.hpp"
+using namespace nxwheels;
 
 struct A {
     auto& operator ++ () { return *this; }

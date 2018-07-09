@@ -1,6 +1,6 @@
-#include "../src/concepts/is_same.hpp"
-#include "../src/control_flow.hpp"
-using namespace nxwheels::concept_check;
+#include "../include/concepts/is_same.hpp"
+#include "../include/control_flow.hpp"
+using namespace nxwheels;
 
 struct ft: false_type {};
 struct tt: true_type {};

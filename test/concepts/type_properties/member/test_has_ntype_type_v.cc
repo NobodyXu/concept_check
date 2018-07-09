@@ -1,6 +1,6 @@
-#include "../../../../src/concepts/is_same.hpp"
-#include "../../../../src/concepts/type_properties/member/has_ntype_type_v.hpp"
-using namespace nxwheels::concept_check;
+#include "../../../../include/concepts/is_same.hpp"
+#include "../../../../include/concepts/type_properties/member/has_ntype_type_v.hpp"
+using namespace nxwheels;
 
 struct A {
     typedef A type;
