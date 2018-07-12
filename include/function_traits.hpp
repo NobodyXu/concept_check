@@ -192,6 +192,7 @@ struct function_traits<R (Args...) const volatile && noexcept(is_noexcept_v)> {
 };
 
 template <class T> constexpr const static inline bool is_function_v = function_traits<T>::is_function_v;
+template <class T> constexpr const static inline bool is_nonthrow_function_v = function_traits<T>::is_noexcept_qualified_v;
 template <class T> constexpr const static inline bool is_function_cvref_qualified_v = function_traits<T>::is_cvref_qualified_v;
 } /* nxwheels */
 #endif
