@@ -1,7 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_is_member_pointer_HPP__
 # define __nobodyxu_concept_check_concepts_is_member_pointer_HPP__
 
-# include "../integral_constant.hpp"
+# include "../bool_constant.hpp"
 # include "../function_traits.hpp"
 
 namespace nxwheels {

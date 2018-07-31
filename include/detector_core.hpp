@@ -1,11 +1,16 @@
 #ifndef __nobodyxu_concept_check_detector_core_HPP__
 # define __nobodyxu_concept_check_detector_core_HPP__
 
-# include "integral_constant.hpp"
-# include "nonsuch.hpp"
-# include "void_t.hpp"
+# include "bool_constant.hpp"
+
+namespace nxwheels {
+template <class ...> using void_t = void;
+struct nonsuch {};
+} /* nxwheels */
 
 namespace nxwheels::impl {
+struct nonsuch {};
+
 template <class Default, class always_void, template <class...> class op, class ...Ts>
 struct detector: false_type { using result_type = Default; };
 

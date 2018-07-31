@@ -1,7 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_is_builtin_nonmember_pointer_HPP__
 # define __nobodyxu_concept_check_concepts_is_builtin_nonmember_pointer_HPP__
 
-# include "../integral_constant.hpp"
+# include "../bool_constant.hpp"
 
 namespace nxwheels {
 template <class T> struct is_builtin_nonmember_pointer:     false_type {};
