@@ -1,4 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/is_self_decrementable_v.hpp"
+#include "../../../include/concepts/operations/is_self_decrementable_v.hpp"
 using namespace nxwheels;
 
 struct A {

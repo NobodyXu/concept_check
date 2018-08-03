@@ -3,7 +3,7 @@
 
 # include <type_traits>
 # include "detector_core.hpp"
-# include "concepts/type_properties/operations/is_convertible_v.hpp"
+# include "concepts/operations/is_convertible_v.hpp"
 
 namespace nxwheels {
 template <class Expected, template <class...> class op, class ...Ts>

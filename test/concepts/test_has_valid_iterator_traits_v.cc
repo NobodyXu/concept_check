@@ -1,4 +1,4 @@
-#include "../../../include/concepts/type_properties/has_valid_iterator_traits_v.hpp"
+#include "../../include/concepts/has_valid_iterator_traits_v.hpp"
 using namespace nxwheels;
 
 struct A {

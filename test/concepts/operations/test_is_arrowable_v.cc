@@ -1,5 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/is_arrowable_v.hpp"
-#include "../../../../include/enable_if.hpp"
+#include "../../../include/concepts/operations/is_arrowable_v.hpp"
 using namespace nxwheels;
 
 struct A {};

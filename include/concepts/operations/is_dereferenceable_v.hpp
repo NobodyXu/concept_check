@@ -1,8 +1,8 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_dereferenceable_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_is_dereferenceable_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_is_dereferenceable_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_dereferenceable_v_HPP__
 
-# include "../../../detector_core.hpp"
-# include "../../../utility.hpp"
+# include "../../detector_core.hpp"
+# include "../../utility.hpp"
 
 namespace nxwheels {
 template <class T> using dereferenced_t = decltype( *declval<T>() );

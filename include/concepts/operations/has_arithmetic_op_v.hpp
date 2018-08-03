@@ -1,9 +1,9 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_has_arithmetic_op_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_has_arithmetic_op_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_has_arithmetic_op_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_has_arithmetic_op_v_HPP__
 
-# include "../../../add_reference.hpp"
-# include "../../../detector_v.hpp"
-# include "../../../utility.hpp"
+# include "../../add_reference.hpp"
+# include "../../detector_v.hpp"
+# include "../../utility.hpp"
 
 namespace nxwheels {
 # define DEF_TP1(NAME, OP)                                                                                                                \
@@ -34,7 +34,7 @@ template <class T1, class T2> constexpr const static inline bool has_nothrow_## 
 }()
 #  define DEF_TP2(NAME, OP)\
 DEF_TP2_impl(NAME, OP, T1);\
-DEF_TP2_impl(NAME ## _assignment, OP##=, add_lvalue_reference<T1>)
+DEF_TP2_impl(NAME ## _assignment, OP##=, add_lvalue_reference_t<T1>)
 
 DEF_TP2(addition, +);
 DEF_TP2(subtraction, -);

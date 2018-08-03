@@ -1,7 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_type_properties_is_referenceable_v_HPP__
 # define __nobodyxu_concept_check_concepts_type_properties_is_referenceable_v_HPP__
 
-# include "../../detector_core.hpp"
+# include "../detector_core.hpp"
 
 namespace nxwheels {
 template <class T> using lvalue_ref_t = T&;

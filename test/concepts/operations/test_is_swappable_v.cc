@@ -1,7 +1,7 @@
 #include <utility>
 using std::swap;
 
-#include "../../../four_types.hpp"
+#include "../../four_types.hpp"
 struct S2 {};
 
 void swap(S&&, S&&) {}
@@ -13,7 +13,7 @@ void swap(U&&, S&&) {}
 void swap(U&, S&&) noexcept {}
 void swap(S&&, U&) noexcept {}
 
-#include "../../../../include/concepts/type_properties/operations/is_swappable_v.hpp"
+#include "../../../include/concepts/operations/is_swappable_v.hpp"
 using namespace nxwheels;
 template <class T> constexpr const static inline bool Is_swappable_v = is_swappable_with_v<T, T>;
 template <class T> constexpr const static inline bool Is_nothrow_swappable_v = is_nothrow_swappable_with_v<T, T>;

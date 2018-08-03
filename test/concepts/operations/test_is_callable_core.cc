@@ -1,7 +1,9 @@
+#include <type_traits>
 #include <tuple>
-#include "../../../../include/concepts/is_same.hpp"
-#include "../../../../include/concepts/type_properties/operations/is_callable_core.hpp"
+#include "../../../include/concepts/operations/is_callable_core.hpp"
 using namespace nxwheels;
+
+template <class T, class U> struct assert_same_t { static_assert(std::is_same<T, U>::value); };
 
 void function() {}
 int function2() { return 1; }

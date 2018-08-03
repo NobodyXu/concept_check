@@ -1,8 +1,8 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_convertible_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_is_convertible_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_is_convertible_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_convertible_v_HPP__
 
-# include "../../../utility.hpp"
-# include "../../is_void_v.hpp"
+# include <type_traits>
+# include "../../utility.hpp"
 # include "is_callable_core.hpp"
 
 # define DEF_ASSERT(CONVERT)                      \
@@ -29,7 +29,7 @@ template <class T> constexpr const static inline auto lambda_for_implicit_conver
 template <class T> using lambda_for_implicit_conversion_t = decltype(lambda_for_implicit_conversion<T>);
 
 template <class From, class To> constexpr const static inline bool is_implicitly_convertible_v = []{
-    if constexpr(is_void_v<To>)
+    if constexpr(std::is_void<To>::value)
         return true;
     else
         return is_callable_v<lambda_for_implicit_conversion_t<To>, From>;

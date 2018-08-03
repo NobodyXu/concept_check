@@ -1,4 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/has_not_op_v.hpp"
+#include "../../../include/concepts/operations/has_not_op_v.hpp"
 using namespace nxwheels;
 
 struct O {};

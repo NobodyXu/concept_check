@@ -1,5 +1,5 @@
 #include <initializer_list>
-#include "../../../../include/concepts/type_properties/operations/is_trivially_constructible.hpp"
+#include "../../../include/concepts/operations/is_trivially_constructible.hpp"
 using namespace nxwheels;
 
 struct A {

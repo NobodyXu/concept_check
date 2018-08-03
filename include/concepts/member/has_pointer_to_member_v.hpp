@@ -1,7 +1,7 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_member_has_pointer_to_member_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_member_has_pointer_to_member_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_member_has_pointer_to_member_v_HPP__
+# define __nobodyxu_concept_check_concepts_member_has_pointer_to_member_v_HPP__
 
-# include "../../../detector_core.hpp"
+# include "../../detector_core.hpp"
 
 namespace nxwheels {
 template <class T, class pointed_t = int> using pointer_to_member_t = pointed_t T::*;

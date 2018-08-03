@@ -1,10 +1,10 @@
-#ifndef __nobodxu_concept_check_concepts_type_properties_operations_is_arrowable_v_HPP__
-# define __nobodxu_concept_check_concepts_type_properties_operations_is_arrowable_v_HPP__
+#ifndef __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
+# define __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 
-# include "../../../detector_core.hpp"
-# include "../../../function_traits.hpp"
-# include "../../../integral_constant.hpp"
-# include "../../is_class_or_union_v.hpp"
+# include "../../detector_core.hpp"
+# include "../../function_traits.hpp"
+# include "../../bool_constant.hpp"
+# include "../is_class_or_union_v.hpp"
 
 namespace nxwheels {
 template <class T> struct has_builtin_arrow:     false_type {};

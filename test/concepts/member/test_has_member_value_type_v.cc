@@ -1,6 +1,6 @@
-#include "../../../../include/concepts/type_properties/member/has_member_value_type_v.hpp"
+#include "../../../include/concepts/member/has_member_value_type_v.hpp"
 using namespace nxwheels;
-#include "../../../four_types.hpp"
+#include "../../four_types.hpp"
 
 struct A {
     typedef int value_type;

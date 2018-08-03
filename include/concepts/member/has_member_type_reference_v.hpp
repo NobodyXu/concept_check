@@ -1,7 +1,7 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_member_has_member_type_reference_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_member_has_member_type_reference_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_member_has_member_type_reference_v_HPP__
+# define __nobodyxu_concept_check_concepts_member_has_member_type_reference_v_HPP__
 
-# include "../../../detector_core.hpp"
+# include "../../detector_core.hpp"
 
 namespace nxwheels {
 template <class T> using member_type_reference_t = typename T::reference;

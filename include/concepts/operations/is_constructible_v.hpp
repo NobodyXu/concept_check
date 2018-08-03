@@ -2,8 +2,8 @@
 # define __nobodyxu_concept_check_is_constructible_v_HPP__
 
 # include <new>
-# include "../../../utility.hpp"
-# include "../../../detector_core.hpp"
+# include "../../utility.hpp"
+# include "../../detector_core.hpp"
 
 namespace nxwheels {
 template <class T, class ...Args> using direct_construct_t          = decltype( new T(declval<Args>()...) );

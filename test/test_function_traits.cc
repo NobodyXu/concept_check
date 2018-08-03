@@ -1,6 +1,8 @@
+#include <type_traits>
 #include "../include/function_traits.hpp"
-#include "../include/concepts/is_same.hpp"
 using namespace nxwheels;
+
+template <class T, class U> constexpr void assert_same() noexcept { static_assert(std::is_same<T, U>::value); }
 
 template <bool is_const_qualified,
           bool is_volatile_qualified,

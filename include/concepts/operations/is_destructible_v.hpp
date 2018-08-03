@@ -1,7 +1,7 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_destructible_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_is_destructible_v_HPP__
-# include "../../../detector_core.hpp"
-# include "../../../utility.hpp"
+#ifndef __nobodyxu_concept_check_concepts_operations_is_destructible_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_destructible_v_HPP__
+# include "../../detector_core.hpp"
+# include "../../utility.hpp"
 namespace nxwheels::destructible_impl {
 template <class T> using destroy_t = decltype(declval<T>().~T(), int{});
 } /* nxwheels::destructible_impl */

@@ -1,12 +1,12 @@
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_pointer_to_member_accessable_v_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_is_pointer_to_member_accessable_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
 
-# include "../../../detector_core.hpp"
-# include "../../../integral_constant.hpp"
-# include "../../../partial_apply.hpp"
-# include "../../../utility.hpp"
+# include "../../detector_core.hpp"
+# include "../../bool_constant.hpp"
+# include "../../partial_apply.hpp"
+# include "../../utility.hpp"
 
-# include "../../is_member_pointer.hpp"
+# include "../is_member_pointer.hpp"
 
 namespace nxwheels {
 // Beg of impl of is_pointer_to_member_accessable_v.

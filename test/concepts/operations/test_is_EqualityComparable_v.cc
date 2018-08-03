@@ -1,4 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/is_EqualityComparable_v.hpp"
+#include "../../../include/concepts/operations/is_EqualityComparable_v.hpp"
 using namespace nxwheels;
 
 struct Boolean {

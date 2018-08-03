@@ -1,4 +1,4 @@
-#include "../../../include/concepts/type_properties/is_referenceable_v.hpp"
+#include "../../include/concepts/is_referenceable_v.hpp"
 using namespace nxwheels;
 
 struct S {};

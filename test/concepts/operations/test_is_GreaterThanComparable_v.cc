@@ -1,4 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/is_GreaterThanComparable_v.hpp"
+#include "../../../include/concepts/operations/is_GreaterThanComparable_v.hpp"
 using namespace nxwheels;
 
 struct NullOp {};

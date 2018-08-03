@@ -1,13 +1,11 @@
 /*!
 * In order to use specialization for initializer_list so that the concepts will work correctly, you need to define NOBODYXU_CONCEPT_INCLUDE_INITIALIZER_LIST.
 */
-#ifndef __nobodyxu_concept_check_concepts_type_properties_operations_is_trivially_constructible_HPP__
-# define __nobodyxu_concept_check_concepts_type_properties_operations_is_trivially_constructible_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_is_trivially_constructible_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_trivially_constructible_HPP__
 
-# include "../../../integral_constant.hpp"
-# include "../../../control_flow.hpp"
-# include "../../is_aggregate_v.hpp"
-# include "../../is_class_or_union_v.hpp"
+# include "../../bool_constant.hpp"
+# include "../is_class_or_union_v.hpp"
 
 namespace nxwheels {
 template <class T> constexpr const static inline bool is_trivially_copy_constructible_v    = __has_trivial_copy(T);

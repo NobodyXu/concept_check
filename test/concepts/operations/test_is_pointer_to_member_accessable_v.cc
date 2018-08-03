@@ -1,4 +1,4 @@
-#include "../../../../include/concepts/type_properties/operations/is_pointer_to_member_accessable_v.hpp"
+#include "../../../include/concepts/operations/is_pointer_to_member_accessable_v.hpp"
 using namespace nxwheels;
 
 struct A {
