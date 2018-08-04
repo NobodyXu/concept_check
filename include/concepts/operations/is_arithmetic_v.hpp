@@ -1,5 +1,5 @@
-#ifndef __nobodyxu_concept_check_concepts_operations_has_arithmetic_op_v_HPP__
-# define __nobodyxu_concept_check_concepts_operations_has_arithmetic_op_v_HPP__
+#ifndef __nobodyxu_concept_check_concepts_operations_is_arithmetic_v_HPP__
+# define __nobodyxu_concept_check_concepts_operations_is_arithmetic_v_HPP__
 
 # include "../../add_reference.hpp"
 # include "def_convenient_macros.hpp"
@@ -25,7 +25,6 @@ DEF_TP2(bitwise_left_shift, <<);
 DEF_TP2(bitwise_right_shift, >>);
 
 #  undef DEF_TP2
-# undef DEF_TP2_impl
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"
