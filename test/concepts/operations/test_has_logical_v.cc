@@ -2,49 +2,21 @@
 using namespace nxwheels;
 
 struct O {};
-namespace And {
-struct A {
-    bool operator && (const A&) const noexcept { return true; }
-};
-struct B {
-    bool operator && (const B&) noexcept { return true; }
-};
-struct C {
-    bool operator && (const C&) const { return true; }
-};
-struct D {
-    bool operator && (const D&) { return true; }
-};
-} /* and */
-
-namespace Or {
-struct A {
-    bool operator || (const A&) const noexcept { return true; }
-};
-struct B {
-    bool operator || (const B&) noexcept { return true; }
-};
-struct C {
-    bool operator || (const C&) const { return true; }
-};
-struct D {
-    bool operator || (const D&) { return true; }
-};
-} /* or */
+#define DEF_TYPE_TO_CHECK(NAME, OP)                                      \
+namespace NAME {                                                         \
+struct A { bool operator OP (const A&) const noexcept { return true; } };\
+struct B { bool operator OP (const B&) noexcept       { return true; } };\
+struct C { bool operator OP (const C&) const          { return true; } };\
+struct D { bool operator OP (const D&)                { return true; } };\
+} /* NAME */
+DEF_TYPE_TO_CHECK(And, &&)
+DEF_TYPE_TO_CHECK(Or, ||)
 
 namespace Not {
-struct A {
-    bool operator ! () const noexcept { return true; }
-};
-struct B {
-    bool operator ! () noexcept { return true; }
-};
-struct C {
-    bool operator ! () const { return true; }
-};
-struct D {
-    bool operator ! () { return true; }
-};
+struct A { bool operator ! () const noexcept { return true; } };
+struct B { bool operator ! () noexcept       { return true; } };
+struct C { bool operator ! () const          { return true; } };
+struct D { bool operator ! ()                { return true; } };
 } /* not */
 
 int main() {
