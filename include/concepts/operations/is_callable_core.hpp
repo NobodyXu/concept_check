@@ -5,8 +5,21 @@
 # include "../../utility.hpp"
 
 namespace nxwheels {
-template <class T, class ...Args> using operator_call = decltype( (declval<T>())(decl_as<Args>()...) );
-template <class T, class ...Args> constexpr const static inline bool is_callable_v = is_detected_v<operator_call, T, Args...>;
-template <class T, class ...Args> using callable_result_t = detected_t<operator_call, T, Args...>;
+# define DEF_TMP template <class T, class ...Args>
+# define VAR constexpr const static inline bool
+
+DEF_TMP using called_ret_t = decltype( (declval<T>())(decl_as<Args>()...) );
+DEF_TMP VAR is_callable_v = is_detected_v<called_ret_t, T, Args...>;
+DEF_TMP VAR is_nothrow_callable_impl_v = noexcept( (declval<T>())(decl_as<Args>()...) );
+DEF_TMP VAR is_nothrow_callable_v = []{
+    if constexpr(is_callable_v<T, Args...>)
+        return is_nothrow_callable_impl_v<T, Args...>;
+    else
+        return false;
+}();
+DEF_TMP using callable_result_t = detected_t<called_ret_t, T, Args...>;
+
+# undef VAR
+# undef DEF_TMP
 } /* nxwheels */
 #endif

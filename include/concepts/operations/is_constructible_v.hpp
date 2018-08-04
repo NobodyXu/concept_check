@@ -6,53 +6,41 @@
 # include "../../detector_core.hpp"
 
 namespace nxwheels {
-template <class T, class ...Args> using direct_construct_t          = decltype( new T(declval<Args>()...) );
-template <class T, class ...Args> using list_construct_t            = decltype( new T{declval<Args>()...} );
-template <class T, class ...Args> using initialier_list_construct_t = decltype( new T({declval<Args>()...}) );
+# define DEF_TMP template <class T, class ...Args>
+# define VAR constexpr const static inline bool
 
-/*!
- * Test whether new T(declval<Args>()...) is valid.
- */
-template <class T, class ...Args> constexpr const static inline bool is_direct_constructible_v = is_detected_v<direct_construct_t, T, Args...>;
-/*!
- * Test whether new T(declval<Args>()...) is valid and new (nullptr) T(declval<Args>()...) is noexcept.
- */
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_direct_constructible_impl_v = noexcept( new (nullptr) T(declval<Args>()...) );
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_direct_constructible_v = [] {
+DEF_TMP using direct_construct_t          = decltype( new T(declval<Args>()...) );
+DEF_TMP using list_construct_t            = decltype( new T{declval<Args>()...} );
+DEF_TMP using initialier_list_construct_t = decltype( new T({declval<Args>()...}) );
+
+DEF_TMP VAR is_direct_constructible_v = is_detected_v<direct_construct_t, T, Args...>;
+DEF_TMP VAR is_nothrow_direct_constructible_impl_v = noexcept( new (nullptr) T(declval<Args>()...) );
+DEF_TMP VAR is_nothrow_direct_constructible_v = [] {
     if constexpr(is_direct_constructible_v<T, Args...>)
         return is_nothrow_direct_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
 
-/*!
- * Test whether new T{declval<Args>()...} is valid.
- */
-template <class T, class ...Args> constexpr const static inline bool is_list_constructible_v = is_detected_v<list_construct_t, T, Args...>;
-/*!
- * Test whether new T{declval<Args>()...} is valid and new (nullptr) T{declval<Args>()...} is noexcept.
- */
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_list_constructible_impl_v = noexcept( new (nullptr) T{declval<Args>()...} );
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_list_constructible_v = [] {
+DEF_TMP VAR is_list_constructible_v = is_detected_v<list_construct_t, T, Args...>;
+DEF_TMP VAR is_nothrow_list_constructible_impl_v = noexcept( new (nullptr) T{declval<Args>()...} );
+DEF_TMP VAR is_nothrow_list_constructible_v = [] {
     if constexpr(is_list_constructible_v<T, Args...>)
         return is_nothrow_list_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
 
-/*!
- * Test whether new T({declval<Args>()...}) is valid.
- */
-template <class T, class ...Args> constexpr const static inline bool is_initializer_list_constructible_v = is_detected_v<initialier_list_construct_t, T, Args...>;
-/*!
- * Test whether new T({declval<Args>()...}) is valid and new (nullptr) T({declval<Args>()...}) is noexcept.
- */
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_initializer_list_constructible_impl_v = noexcept( new (nullptr) T({declval<Args>()...}) );
-template <class T, class ...Args> constexpr const static inline bool is_nothrow_initializer_list_constructible_v = []{
+DEF_TMP VAR is_initializer_list_constructible_v = is_detected_v<initialier_list_construct_t, T, Args...>;
+DEF_TMP VAR is_nothrow_initializer_list_constructible_impl_v = noexcept( new (nullptr) T({declval<Args>()...}) );
+DEF_TMP VAR is_nothrow_initializer_list_constructible_v = []{
     if constexpr(is_initializer_list_constructible_v<T, Args...>)
         return is_nothrow_initializer_list_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
+
+# undef VAR
+# undef DEF_TMP
 } /* nxwheels */
 #endif

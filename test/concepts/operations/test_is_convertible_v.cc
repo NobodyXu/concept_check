@@ -22,6 +22,28 @@ struct D {
     D(D&&) = delete;
 };
 
+# define DEF_ASSERT(CONVERT)                      \
+template <class From, class To>                   \
+constexpr void assert_## CONVERT () noexcept {    \
+    static_assert(is_## CONVERT ##_v<From, To>);  \
+}                                                 \
+template <class From, class To>                   \
+struct assert_## CONVERT ##_t {                   \
+    static_assert(is_## CONVERT ##_v<From, To>);  \
+};                                                \
+                                                  \
+template <class From, class To>                   \
+constexpr void assert_not_## CONVERT () noexcept {\
+    static_assert(!is_## CONVERT ##_v<From, To>); \
+}                                                 \
+template <class From, class To>                   \
+struct assert_not_## CONVERT ##_t {               \
+    static_assert(!is_## CONVERT ##_v<From, To>); \
+}
+
+DEF_ASSERT(implicitly_convertible);
+DEF_ASSERT(nothrow_implicitly_convertible);
+
 int main() {
     // Test is_implicitly_convertible_v.
     {
