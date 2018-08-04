@@ -7,8 +7,11 @@ struct B { B operator + () const noexcept { return {}; } };
 struct C { C operator + (const C&) const  { return {}; } };
 struct D { D operator + (const D&) const noexcept { return {}; } };
 
+struct E { E& operator += (const E&) noexcept { return *this; } };
+struct F { F& operator += (const E&)          { return *this; } };
+
 int main() {
-    //Test is_unary_plus_op_v.
+    //Test is_unary_plusable_v.
     {
 
         static_assert(!is_unary_plusable_v<null>);
@@ -29,7 +32,7 @@ int main() {
 
     }
 
-    //Test has_addition_op_v.
+    //Test is_additionable_v.
     {
 
         static_assert(!is_additionable_v<null, null>);
@@ -39,7 +42,7 @@ int main() {
 
     }
 
-    //Test has_nothrow_addition_op_v.
+    //Test is_nothrow_additionable_v.
     {
 
         static_assert(!is_nothrow_additionable_v<null, null>);
@@ -47,6 +50,28 @@ int main() {
 
         static_assert(is_nothrow_additionable_v<int, int>);
         static_assert(is_nothrow_additionable_v<D, D>);
+
+    }
+
+    //Test is_addition_assignmentable_v.
+    {
+
+        static_assert(!is_addition_assignmentable_v<null, null>);
+
+        static_assert(is_addition_assignmentable_v<int&, int&>);
+        static_assert(is_addition_assignmentable_v<E&, E>);
+
+    }
+
+    //Test is_nothrow_addition_assignmentable_v.
+    {
+
+        static_assert(!is_nothrow_addition_assignmentable_v<null, null>);
+        static_assert(!is_nothrow_addition_assignmentable_v<C, C>);
+        static_assert(!is_nothrow_addition_assignmentable_v<F, F>);
+
+        static_assert(is_nothrow_addition_assignmentable_v<int&, int>);
+        static_assert(is_nothrow_addition_assignmentable_v<E, E>);
 
     }
 
