@@ -9,6 +9,6 @@ namespace nxwheels {
 DEF_UN_CHECK(address, &);
 } /* nxwheels */
 
-# include "def_convenient_macros.hpp"
+# include "undef_convenient_macros.hpp"
 
 #endif
