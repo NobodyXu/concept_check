@@ -2,24 +2,10 @@
 using namespace nxwheels;
 
 struct null {};
-struct A {
-    A operator + () const { return {}; }
-};
-struct B {
-    B operator + () const noexcept { return {}; }
-};
-struct C {
-    C operator + (const C&) const { return {}; }
-};
-struct D {
-    D operator + (const D&) const noexcept { return {}; }
-};
-
-#define DEF(NAME, OP)\
-template <class T1, class T2> using NAME ##_t = decltype( declval<T1>() OP declval<T2>() )
-#define DEF_DEF(NAME, OP) DEF(NAME, OP)
-
-DEF_DEF(a, +);
+struct A { A operator + () const          { return {}; } };
+struct B { B operator + () const noexcept { return {}; } };
+struct C { C operator + (const C&) const  { return {}; } };
+struct D { D operator + (const D&) const noexcept { return {}; } };
 
 int main() {
     //Test has_unary_plus_op_v.
