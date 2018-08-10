@@ -1,6 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 
+# include <type_traits>
 # include "../../detector_core.hpp"
 # include "../../utility.hpp"
 
@@ -21,5 +22,7 @@ DEF_TMP using callable_result_t = detected_t<called_ret_t, T, Args...>;
 
 # undef VAR
 # undef DEF_TMP
+
+template <class T, class ...Args> using callable_t = std::enable_if_t<is_callable_v<T, Args...>, T>;
 } /* nxwheels */
 #endif
