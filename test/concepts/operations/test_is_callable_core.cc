@@ -27,6 +27,12 @@ struct convert_callable2 {
 
 struct not_callable {};
 
+template <class ...Args>
+struct functor {
+    template <class T>
+    void operator () (callable_t<T, Args...> &&f) {}
+};
+
 int main() {
     // Test is_callable_v.
     static_assert(!is_callable_v<int>);
@@ -55,4 +61,15 @@ int main() {
                assert_same_t<callable_result_t<decltype(lambda2)>, int>,
                assert_same_t<callable_result_t<convert_callable1>, void>,
                assert_same_t<callable_result_t<convert_callable3>, int>   > tuple{};
+
+    // Test callable_t.
+    {
+
+        functor<> F1;
+        functor<int> F2;
+
+        F1([]{});
+        F2([](int){});
+
+    }
 }
