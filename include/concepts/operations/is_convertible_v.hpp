@@ -5,7 +5,6 @@
 # include "../../utility.hpp"
 # include "is_callable_core.hpp"
 
-
 namespace nxwheels {
 template <class T> constexpr const static inline auto lambda_for_implicit_conversion = [](T) noexcept {};
 template <class T> using lambda_for_implicit_conversion_t = decltype(lambda_for_implicit_conversion<T>);
@@ -25,5 +24,8 @@ template <class From, class To> constexpr const static inline bool is_nothrow_im
     else
         return false;
 }();
+
+template <class T1, class T2, class = std::enable_if_t<is_implicitly_convertible_v<T1, T2>>> using implicitly_convertible_t = T1;
+template <class T1, class T2, class = std::enable_if_t<is_nothrow_implicitly_convertible_v<T1, T2>>> using nothrow_implicitly_convertiable_t = T1;
 } /* nxwheels */
 #endif
