@@ -5,6 +5,7 @@
 
 namespace nxwheels {
 DEF_UN_CHECK(dereference, *);
+DEF_UN_CHECK_T(dereference);
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"

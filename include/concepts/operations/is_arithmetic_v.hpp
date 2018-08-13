@@ -9,9 +9,15 @@ DEF_UN_IMP_CONVERT_CHECK(unary_plus, +, T);
 DEF_UN_IMP_CONVERT_CHECK(unary_minus, -, T);
 DEF_UN_IMP_CONVERT_CHECK(bitwise_not, ~, T);
 
-#  define DEF_TP2(NAME, OP)\
-DEF_BIN_IMP_CONVERT_CHECK(NAME, OP, T1);\
-DEF_BIN_IMP_CONVERT_CHECK(NAME ## _assignment, OP##=, add_lvalue_reference_t<T1>)
+DEF_UN_CHECK_T(unary_plus);
+DEF_UN_CHECK_T(unary_minus);
+DEF_UN_CHECK_T(bitwise_not);
+
+#  define DEF_TP2(NAME, OP)                                                       \
+DEF_BIN_IMP_CONVERT_CHECK(NAME, OP, T1);                                          \
+DEF_BIN_CHECK_T(NAME);                                                            \
+DEF_BIN_IMP_CONVERT_CHECK(NAME ## _assignment, OP##=, add_lvalue_reference_t<T1>);\
+DEF_BIN_CHECK_T(NAME ##_assignment)
 
 DEF_TP2(addition, +);
 DEF_TP2(subtraction, -);

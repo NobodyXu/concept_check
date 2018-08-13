@@ -19,6 +19,10 @@ struct S2 {
     undestructible operator & () const noexcept { return {}; }
 };
 
+// Test addressable_t.
+template <class T>
+void F(addressable_t<T> &&) {}
+
 int main() {
     // Test is_addressable_v.
     {
@@ -42,4 +46,11 @@ int main() {
 
     }
 
+    // Test addressable_t.
+    {
+
+        //F(S{});
+        F(S0{});
+
+    }
 }

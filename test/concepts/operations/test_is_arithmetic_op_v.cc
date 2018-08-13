@@ -10,6 +10,10 @@ struct D { D operator + (const D&) const noexcept { return {}; } };
 struct E { E& operator += (const E&) noexcept { return *this; } };
 struct F { F& operator += (const E&)          { return *this; } };
 
+// Test additionable_t.
+template <class T>
+void Func(additionable_t<T, T> &&) {}
+
 int main() {
     //Test is_unary_plusable_v.
     {
@@ -75,4 +79,11 @@ int main() {
 
     }
 
+    // Test additionable_t.
+    {
+
+        //Func(F{});
+        Func(int{});
+
+    }
 }

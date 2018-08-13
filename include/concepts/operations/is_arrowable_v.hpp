@@ -5,6 +5,7 @@
 # include "../../function_traits.hpp"
 # include "../../bool_constant.hpp"
 # include "../is_class_or_union_v.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 template <class T> struct is_builtin_arrowable:     false_type {};
@@ -30,5 +31,10 @@ template <class T> constexpr const static inline bool is_nothrow_arrowable_v = [
     else
         return false;
 }();
+
+DEF_UN_CHECK_T(arrow);
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif
