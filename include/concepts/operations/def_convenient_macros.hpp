@@ -1,3 +1,4 @@
+#include <type_traits>
 #include "../../detector_v.hpp"
 #include "../../utility.hpp"
 
@@ -51,4 +52,15 @@ template <class T1, class T2> constexpr const static inline bool is_nothrow_## N
     else                                                                                                                                       \
         return false;                                                                                                                          \
 }()
+#endif
+
+#ifndef DEF_UN_CHECK_T
+# define DEF_UN_CHECK_T(NAME)                                                                                   \
+template <class T, class = std::enable_if_t<is_## NAME ##able_v<T>>> using NAME ##able_t = T;                   \
+template <class T, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T>>> using nothrow_## NAME ##able_t = T;
+#endif
+#ifndef DEF_BIN_CHECK_T
+# define DEF_BIN_CHECK_T(NAME)                                                                                                   \
+template <class T1, class T2, class = std::enable_if_t<is_## NAME ##able_v<T1, T2>>> using NAME ##able_t = T1;                   \
+template <class T1, class T2, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T1, T2>>> using nothrow_## NAME ##able_t = T1;
 #endif
