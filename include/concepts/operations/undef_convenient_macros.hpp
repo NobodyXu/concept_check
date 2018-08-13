@@ -21,3 +21,7 @@
 #ifdef DEF_BIN_CHECK_T
 # undef DEF_BIN_CHECK_T
 #endif
+
+#ifdef DEF_T_ARGS_CHECK_T
+# undef DEF_T_ARGS_CHECK_T
+#endif

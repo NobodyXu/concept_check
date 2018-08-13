@@ -27,6 +27,7 @@ struct convert_callable2 {
 
 struct not_callable {};
 
+// Test callable_t.
 template <class ...Args>
 struct functor {
     template <class T>
@@ -72,4 +73,5 @@ int main() {
         F2([](int){});
 
     }
+
 }

@@ -1,11 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
 
-# include "../../detector_core.hpp"
-# include "../../bool_constant.hpp"
-# include "../../partial_apply.hpp"
-# include "../../utility.hpp"
-
+# include "def_convenient_macros.hpp"
 # include "../is_member_pointer.hpp"
 
 namespace nxwheels {
@@ -64,5 +60,10 @@ template <class T, class P> constexpr const static inline bool is_nothrow_pointe
     else
         return is_nothrow_pointer_to_data_member_accessable_v<T, P>;
 }();
+
+DEF_BIN_CHECK_T(pointer_to_member_access);
 } /* nxwheels */
+
+# include "def_convenient_macros.hpp"
+
 #endif

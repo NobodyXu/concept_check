@@ -1,6 +1,8 @@
-#include <type_traits>
-#include "../../detector_v.hpp"
-#include "../../utility.hpp"
+# include <type_traits>
+# include "../../detector_core.hpp"
+# include "../../partial_apply.hpp"
+# include "../../type_tuple.hpp"
+# include "../../utility.hpp"
 
 #ifndef DEF_UN_CHECK
 # define DEF_UN_CHECK(NAME, OP)                                                                                 \
@@ -64,4 +66,12 @@ template <class T, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T>>> usi
 # define DEF_BIN_CHECK_T(NAME)                                                                                                   \
 template <class T1, class T2, class = std::enable_if_t<is_## NAME ##able_v<T1, T2>>> using NAME ##able_t = T1;                   \
 template <class T1, class T2, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T1, T2>>> using nothrow_## NAME ##able_t = T1;
+#endif
+
+#ifndef DEF_T_ARGS_CHECK_T
+# define DEF_T_ARGS_CHECK_T(NAME)                                                                                                                                  \
+template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME ##able, T), para_tuple>::value> > using NAME ##able_t_impl = T;\
+template <class T, class ...Args> using NAME ##able_t = NAME ##able_t_impl<T, type_tuple<Args...>>;                                                                \
+template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_nothrow_## NAME ##able, T), para_tuple>::value> > using nothrow_## NAME ##able_t_impl = T;\
+template <class T, class ...Args> using nothrow_## NAME ##able_t = nothrow_## NAME ##able_t_impl<T, type_tuple<Args...>>;
 #endif

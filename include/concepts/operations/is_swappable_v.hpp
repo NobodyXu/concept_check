@@ -1,9 +1,8 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_swappable_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_swappable_v_HPP__
 
-# include "../../detector_core.hpp"
-# include "../../utility.hpp"
 # include "../is_referenceable_v.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 template <class T1, class T2> using swap_ret_t = decltype( swap(declval<T1>(), declval<T2>()) );
@@ -50,5 +49,10 @@ template <class T> constexpr const static inline bool is_nothrow_swappable_v = [
     else
         return false;
 }();
+
+DEF_UN_CHECK_T(swapp);
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif

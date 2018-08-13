@@ -4,7 +4,7 @@
 # include <type_traits>
 # include "../../add_reference.hpp"
 # include "../../detector_v.hpp"
-# include "../../utility.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 template <class T> using pre_decremented_t = decltype( --declval<T>() );
@@ -28,5 +28,11 @@ template <class T> constexpr const static inline bool is_nothrow_post_decrementa
     else
         return false;
 }();
+
+DEF_UN_CHECK_T(pre_decrement);
+DEF_UN_CHECK_T(post_decrement);
 } /* nxwheels */
+
+# include "def_convenient_macros.hpp"
+
 #endif

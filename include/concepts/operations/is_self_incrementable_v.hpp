@@ -4,7 +4,7 @@
 # include <type_traits>
 # include "../../add_reference.hpp"
 # include "../../detector_v.hpp"
-# include "../../utility.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 template <class T> using pre_incremented_t = decltype( ++declval<T>() );
@@ -34,5 +34,11 @@ template <class T> constexpr const static inline bool is_nothrow_post_incrementa
     else
         return false;
 }();
+
+DEF_UN_CHECK_T(pre_increment);
+DEF_UN_CHECK_T(post_increment);
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif

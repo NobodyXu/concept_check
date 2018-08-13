@@ -1,11 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 
-# include <type_traits>
-# include "../../detector_core.hpp"
-# include "../../partial_apply.hpp"
-# include "../../type_tuple.hpp"
-# include "../../utility.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 # define DEF_TMP template <class T, class ...Args>
@@ -22,12 +18,15 @@ DEF_TMP VAR is_nothrow_callable_v = []{
     else
         return false;
 }();
+DEF_TMP struct is_nothrow_callable: bool_constant<is_nothrow_callable_v<T, Args...>> {};
 DEF_TMP using callable_result_t = detected_t<called_ret_t, T, Args...>;
 
 # undef VAR
 # undef DEF_TMP
 
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_callable, T), para_tuple>::value> > using callable_t_impl = T;
-template <class T, class ...Args> using callable_t = callable_t_impl<T, type_tuple<Args...>>;
+DEF_T_ARGS_CHECK_T(call);
 } /* nxwheels */
+
+# include "def_convenient_macros.hpp"
+
 #endif
