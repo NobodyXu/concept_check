@@ -37,18 +37,18 @@ struct G {
 };
 
 int main() {
-    // Test has_builtin_arrow_v.
+    // Test is_builtin_arrowable_v.
     {
 
-        static_assert(!has_builtin_arrow_v<void>);
-        static_assert(!has_builtin_arrow_v<A>);
-        static_assert(!has_builtin_arrow_v<int*>);
+        static_assert(!is_builtin_arrowable_v<void>);
+        static_assert(!is_builtin_arrowable_v<A>);
+        static_assert(!is_builtin_arrowable_v<int*>);
 
-        static_assert(has_builtin_arrow_v<A*>);
+        static_assert(is_builtin_arrowable_v<A*>);
 
     }
 
-    // Test has_member_function_arrow_overload_v.
+    // Test is_member_function_arrow_overload_v.
     {
 
         static_assert(!has_member_function_arrow_overload_v<void>);
