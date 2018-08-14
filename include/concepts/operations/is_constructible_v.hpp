@@ -7,6 +7,7 @@
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
 # include "../../utility.hpp"
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 # define DEF_TMP template <class T, class ...Args>
@@ -56,16 +57,11 @@ DEF_CLASS_WRAPPER(initializer_list_constructible);
 # undef DEF_CLASS_WRAPPER
 # undef _DEF_CLASS_WRAPPER
 
-# define DEF_T_ARGS_CHECK_T(NAME)                                                                                                                                  \
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME ##ible, T), para_tuple>::value> > using NAME ##ible_t_impl = T;\
-template <class T, class ...Args> using NAME ##ible_t = NAME ##ible_t_impl<T, type_tuple<Args...>>;                                                                \
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_nothrow_## NAME ##ible, T), para_tuple>::value> > using nothrow_## NAME ##ible_t_impl = T;\
-template <class T, class ...Args> using nothrow_## NAME ##ible_t = nothrow_## NAME ##ible_t_impl<T, type_tuple<Args...>>;
-
-DEF_T_ARGS_CHECK_T(direct_construct);
-DEF_T_ARGS_CHECK_T(list_construct);
-DEF_T_ARGS_CHECK_T(initializer_list_construct);
-
-# undef DEF_T_ARGS_CHECK_T
+DEF_T_ARGS_CHECK_T_IMPL(direct_constructible);
+DEF_T_ARGS_CHECK_T_IMPL(list_constructible);
+DEF_T_ARGS_CHECK_T_IMPL(initializer_list_constructible);
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif
