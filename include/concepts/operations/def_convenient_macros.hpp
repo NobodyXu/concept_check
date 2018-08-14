@@ -3,7 +3,7 @@
 # include "../../type_tuple.hpp"
 # include "../../utility.hpp"
 
-#ifndef DONT_USE_DETECTOR_V
+#ifdef DONT_USE_DETECTOR_V
 # include "../../detector_core.hpp"
 #else
 # include "../../detector_v.hpp"
