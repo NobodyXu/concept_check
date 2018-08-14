@@ -1,8 +1,13 @@
 # include <type_traits>
-# include "../../detector_v.hpp"
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
 # include "../../utility.hpp"
+
+#ifndef DONT_USE_DETECTOR_V
+# include "../../detector_core.hpp"
+#else
+# include "../../detector_v.hpp"
+#endif
 
 #ifndef DEF_UN_CHECK
 # define DEF_UN_CHECK(NAME, OP)                                                                                 \

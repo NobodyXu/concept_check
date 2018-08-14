@@ -1,6 +1,7 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_callable_core_HPP__
 
+# define DONT_USE_DETECTOR_V
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {

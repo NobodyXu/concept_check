@@ -3,6 +3,7 @@
 
 # include <type_traits>
 # include "is_callable_core.hpp"
+# define DONT_USE_DETECTOR_V
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
