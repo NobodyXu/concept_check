@@ -9,8 +9,6 @@ struct nonsuch {};
 } /* nxwheels */
 
 namespace nxwheels::impl {
-struct nonsuch {};
-
 template <class Default, class always_void, template <class...> class op, class ...Ts>
 struct detector: false_type { using result_type = Default; };
 
