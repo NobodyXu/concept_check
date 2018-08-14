@@ -56,22 +56,42 @@ template <class T1, class T2> constexpr const static inline bool is_nothrow_## N
 }()
 #endif
 
+#ifndef DEF_UN_CHECK_T_IMPL_IMPL
+# define DEF_UN_CHECK_T_IMPL_IMPL(NAME)                                              \
+template <class T, class = std::enable_if_t<is_## NAME ##_v<T>>> using NAME ##_t = T
+#endif
+
+#ifndef DEF_UN_CHECK_T_IMPL
+# define DEF_UN_CHECK_T_IMPL(NAME) DEF_UN_CHECK_T_IMPL_IMPL(NAME); DEF_UN_CHECK_T_IMPL_IMPL(nothrow_## NAME)
+#endif
+
 #ifndef DEF_UN_CHECK_T
-# define DEF_UN_CHECK_T(NAME)                                                                                   \
-template <class T, class = std::enable_if_t<is_## NAME ##able_v<T>>> using NAME ##able_t = T;                   \
-template <class T, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T>>> using nothrow_## NAME ##able_t = T;
+# define DEF_UN_CHECK_T(NAME) DEF_UN_CHECK_T_IMPL(NAME ##able)
+#endif
+
+#ifndef DEF_BIN_CHECK_T_IMPL_IMPL
+# define DEF_BIN_CHECK_T_IMPL_IMPL(NAME)                                                              \
+template <class T1, class T2, class = std::enable_if_t<is_## NAME ##_v<T1, T2>>> using NAME ##_t = T1;
+#endif
+
+#ifndef DEF_BIN_CHECK_T_IMPL
+# define DEF_BIN_CHECK_T_IMPL(NAME) DEF_BIN_CHECK_T_IMPL_IMPL(NAME); DEF_BIN_CHECK_T_IMPL_IMPL(nothrow_## NAME)
 #endif
 
 #ifndef DEF_BIN_CHECK_T
-# define DEF_BIN_CHECK_T(NAME)                                                                                                   \
-template <class T1, class T2, class = std::enable_if_t<is_## NAME ##able_v<T1, T2>>> using NAME ##able_t = T1;                   \
-template <class T1, class T2, class = std::enable_if_t<is_nothrow_## NAME ##able_v<T1, T2>>> using nothrow_## NAME ##able_t = T1;
+# define DEF_BIN_CHECK_T(NAME) DEF_BIN_CHECK_T_IMPL(NAME ##able)
+#endif
+
+#ifndef DEF_T_ARGS_CHECK_T_IMPL_IMPL
+# define DEF_T_ARGS_CHECK_T_IMPL_IMPL(NAME)                                                                                                             \
+template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME, T), para_tuple>::value> > using NAME ##_t_impl = T;\
+template <class T, class ...Args> using NAME ##_t = NAME ##_t_impl<T, type_tuple<Args...>>;
+#endif
+
+#ifndef DEF_T_ARGS_CHECK_T_IMPL
+# define DEF_T_ARGS_CHECK_T_IMPL(NAME) DEF_T_ARGS_CHECK_T_IMPL_IMPL(NAME); DEF_T_ARGS_CHECK_T_IMPL_IMPL(nothrow_## NAME)
 #endif
 
 #ifndef DEF_T_ARGS_CHECK_T
-# define DEF_T_ARGS_CHECK_T(NAME)                                                                                                                                  \
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME ##able, T), para_tuple>::value> > using NAME ##able_t_impl = T;\
-template <class T, class ...Args> using NAME ##able_t = NAME ##able_t_impl<T, type_tuple<Args...>>;                                                                \
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_nothrow_## NAME ##able, T), para_tuple>::value> > using nothrow_## NAME ##able_t_impl = T;\
-template <class T, class ...Args> using nothrow_## NAME ##able_t = nothrow_## NAME ##able_t_impl<T, type_tuple<Args...>>;
+# define DEF_T_ARGS_CHECK_T(NAME) DEF_T_ARGS_CHECK_T_IMPL(NAME ##able)
 #endif
