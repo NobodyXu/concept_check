@@ -47,22 +47,17 @@ DEF_TMP VAR is_nothrow_initializer_list_constructible_v = []{
 # define DEF_TMP template <class T>
 
 // Define of shortcut of often used concepts.
-DEF_TMP VAR is_copy_constructible_v = is_direct_constructible_v<T, const T&>;
+DEF_TMP VAR is_default_constructible_v              = is_direct_constructible_v<T>;
+DEF_TMP VAR is_nothrow_default_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T>;
+DEF_TMP VAR is_nothrow_default_constructible_v      = is_nothrow_direct_constructible_v<T>;
+
+DEF_TMP VAR is_copy_constructible_v              = is_direct_constructible_v<T, const T&>;
 DEF_TMP VAR is_nothrow_copy_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, const T&>;
-DEF_TMP VAR is_nothrow_copy_constructible_v = []{
-    if constexpr(is_copy_constructible_v<T>)
-        return is_nothrow_copy_constructible_impl_v<T>;
-    else
-        return false;
-}();
-DEF_TMP VAR is_move_constructible_v = is_direct_constructible_v<T, T&&>;
+DEF_TMP VAR is_nothrow_copy_constructible_v      = is_nothrow_direct_constructible_v<T, const T&>;
+
+DEF_TMP VAR is_move_constructible_v              = is_direct_constructible_v<T, T&&>;
 DEF_TMP VAR is_nothrow_move_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, T&&>;
-DEF_TMP VAR is_nothrow_move_constructible_v = []{
-    if constexpr(is_move_constructible_v<T>)
-        return is_nothrow_move_constructible_impl_v<T>;
-    else
-        return false;
-}();
+DEF_TMP VAR is_nothrow_move_constructible_v      = is_nothrow_direct_constructible_v<T, T&&>;
 
 # undef VAR
 # undef DEF_TMP
@@ -73,6 +68,7 @@ DEF_TMP VAR is_nothrow_move_constructible_v = []{
 DEF_CLASS_WRAPPER(direct_constructible);
 DEF_CLASS_WRAPPER(list_constructible);
 DEF_CLASS_WRAPPER(initializer_list_constructible);
+DEF_CLASS_WRAPPER(default_constructible);
 DEF_CLASS_WRAPPER(copy_constructible);
 DEF_CLASS_WRAPPER(move_constructible);
 
@@ -82,6 +78,9 @@ DEF_CLASS_WRAPPER(move_constructible);
 DEF_T_ARGS_CHECK_T_IMPL(direct_constructible);
 DEF_T_ARGS_CHECK_T_IMPL(list_constructible);
 DEF_T_ARGS_CHECK_T_IMPL(initializer_list_constructible);
+DEF_T_ARGS_CHECK_T_IMPL(default_constructible);
+DEF_T_ARGS_CHECK_T_IMPL(copy_constructible);
+DEF_T_ARGS_CHECK_T_IMPL(move_constructible);
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"
