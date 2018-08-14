@@ -44,6 +44,28 @@ DEF_TMP VAR is_nothrow_initializer_list_constructible_v = []{
         return false;
 }();
 
+// Check DEF_TMP from T + variable args to T.
+# undef DEF_TMP
+# define DEF_TMP template <class T>
+
+// Define of shortcut of often used concepts.
+DEF_TMP VAR is_copy_constructible_v = is_direct_constructible_v<T, const T&>;
+DEF_TMP VAR is_nothrow_copy_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, const T&>;
+DEF_TMP VAR is_nothrow_copy_constructible_v = []{
+    if constexpr(is_copy_constructible_v<T>)
+        return is_nothrow_copy_constructible_impl_v<T>;
+    else
+        return false;
+}();
+DEF_TMP VAR is_move_constructible_v = is_direct_constructible_v<T, T&&>;
+DEF_TMP VAR is_nothrow_move_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, T&&>;
+DEF_TMP VAR is_nothrow_move_constructible_v = []{
+    if constexpr(is_move_constructible_v<T>)
+        return is_nothrow_move_constructible_impl_v<T>;
+    else
+        return false;
+}();
+
 # undef VAR
 # undef DEF_TMP
 
@@ -53,6 +75,8 @@ DEF_TMP VAR is_nothrow_initializer_list_constructible_v = []{
 DEF_CLASS_WRAPPER(direct_constructible);
 DEF_CLASS_WRAPPER(list_constructible);
 DEF_CLASS_WRAPPER(initializer_list_constructible);
+DEF_CLASS_WRAPPER(copy_constructible);
+DEF_CLASS_WRAPPER(move_constructible);
 
 # undef DEF_CLASS_WRAPPER
 # undef _DEF_CLASS_WRAPPER
