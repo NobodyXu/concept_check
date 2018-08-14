@@ -3,7 +3,6 @@
 
 # include <type_traits>
 # include "../../add_reference.hpp"
-# include "../../detector_v.hpp"
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {

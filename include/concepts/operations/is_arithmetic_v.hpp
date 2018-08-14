@@ -2,7 +2,6 @@
 # define __nobodyxu_concept_check_concepts_operations_is_arithmetic_v_HPP__
 
 # include "../../add_reference.hpp"
-# include "../../detector_v.hpp"
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
