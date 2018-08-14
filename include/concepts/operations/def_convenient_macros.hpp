@@ -1,5 +1,5 @@
 # include <type_traits>
-# include "../../detector_core.hpp"
+# include "../../detector_v.hpp"
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
 # include "../../utility.hpp"
