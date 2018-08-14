@@ -3,10 +3,8 @@
 
 # include <new>
 # include <type_traits>
-# include "../../detector_core.hpp"
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
-# include "../../utility.hpp"
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {

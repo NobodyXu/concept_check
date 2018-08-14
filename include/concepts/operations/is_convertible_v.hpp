@@ -2,7 +2,6 @@
 # define __nobodyxu_concept_check_concepts_operations_is_convertible_v_HPP__
 
 # include <type_traits>
-# include "../../utility.hpp"
 # include "is_callable_core.hpp"
 # include "def_convenient_macros.hpp"
 

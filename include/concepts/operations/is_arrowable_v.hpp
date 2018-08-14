@@ -1,9 +1,7 @@
 #ifndef __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 # define __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 
-# include "../../detector_core.hpp"
 # include "../../function_traits.hpp"
-# include "../../bool_constant.hpp"
 # include "../is_class_or_union_v.hpp"
 # include "def_convenient_macros.hpp"
 
