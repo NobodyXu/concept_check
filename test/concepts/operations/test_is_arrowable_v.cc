@@ -35,6 +35,10 @@ struct G {
     template <class = void>
     A* operator -> () noexcept;
 };
+struct H {
+    int *p;
+    int* operator -> () noexcept;
+};
 
 int main() {
     // Test is_builtin_arrowable_v.
@@ -63,6 +67,7 @@ int main() {
 
         static_assert(has_member_function_arrow_overload_v<B>);
         static_assert(has_member_function_arrow_overload_v<C>);
+        static_assert(has_member_function_arrow_overload_v<H>);
 
     }
 
