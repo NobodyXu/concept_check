@@ -18,8 +18,12 @@ template <class T> constexpr const static inline bool is_nothrow_post_incrementa
         return false;
 }();
 
+template <class T> constexpr const static inline bool is_self_incrementable_v = is_pre_incrementable_v<T> && is_post_incrementable_v<T>;
+template <class T> constexpr const static inline bool is_nothrow_self_incrementable_v = is_nothrow_pre_incrementable_v<T> && is_nothrow_post_incrementable_v<T>;
+
 DEF_UN_CHECK_T(pre_increment);
 DEF_UN_CHECK_T(post_increment);
+DEF_UN_CHECK_T(self_increment);
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"

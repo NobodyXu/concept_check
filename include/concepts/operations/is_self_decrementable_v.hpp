@@ -18,8 +18,12 @@ template <class T> constexpr const static inline bool is_nothrow_post_decrementa
         return false;
 }();
 
+template <class T> constexpr const static inline bool is_self_decrementable_v = is_pre_decrementable_v<T> && is_post_decrementable_v<T>;
+template <class T> constexpr const static inline bool is_nothrow_self_decrementable_v = is_nothrow_pre_decrementable_v<T> && is_nothrow_post_decrementable_v<T>;
+
 DEF_UN_CHECK_T(pre_decrement);
 DEF_UN_CHECK_T(post_decrement);
+DEF_UN_CHECK_T(self_decrement);
 } /* nxwheels */
 
 # include "def_convenient_macros.hpp"
