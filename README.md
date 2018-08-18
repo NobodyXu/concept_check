@@ -45,7 +45,7 @@ In order to make defining them eaiser, I use a lot of macro in concepts. Use of 
 
 Most of the oncepts under ```/include/concepts/operations/``` are intended to be able to work with reference, except ```is_arrowable_v.hpp```(Test op ```->```). This file contains hacks to work around the limit of ```detector idoms```, and cannot be used with reference or const/volatile qualified types.
 
-## How this works
+## How this library works
 Most of the concepts defined in this library use ```declval``` defined in ```/include/utility.hpp``` to "get" instance of a type in an unevaluated context and class template ```is_detected_v``` in ```/include/detector_core.hpp``` to check whether an expression is valid. ```is_detected_v``` is a library fundamentals TS v2 feature, you can find more description of it at [here](https://en.cppreference.com/w/cpp/experimental/is_detected). My detector is compliant to its API.
 
 ## Reason why some of the utility and concepts are rewriten here despite ```STL``` has defined them
