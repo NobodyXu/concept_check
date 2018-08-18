@@ -36,6 +36,7 @@ struct function_traits<R (Args...) noexcept(is_noexcept)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (*)(Args...) noexcept(is_noexcept);
 };
 
@@ -54,6 +55,7 @@ struct function_traits<R (Args...) const noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -69,6 +71,7 @@ struct function_traits<R (Args...) const & noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const & noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -84,6 +87,7 @@ struct function_traits<R (Args...) const && noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const && noexcept(is_noexcept_v);
 };
 
@@ -100,6 +104,7 @@ struct function_traits<R (Args...) volatile noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) volatile noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -115,6 +120,7 @@ struct function_traits<R (Args...) volatile & noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) volatile & noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -130,6 +136,7 @@ struct function_traits<R (Args...) volatile && noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) volatile && noexcept(is_noexcept_v);
 };
 
@@ -146,6 +153,7 @@ struct function_traits<R (Args...) & noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) & noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -161,6 +169,7 @@ struct function_traits<R (Args...) && noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) && noexcept(is_noexcept_v);
 };
 
@@ -177,6 +186,7 @@ struct function_traits<R (Args...) const volatile noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const volatile noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -192,6 +202,7 @@ struct function_traits<R (Args...) const volatile & noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const volatile & noexcept(is_noexcept_v);
 };
 template <class R, class ...Args, bool is_noexcept_v>
@@ -207,6 +218,7 @@ struct function_traits<R (Args...) const volatile && noexcept(is_noexcept_v)> {
     constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
+    using ret_t = R;
     using add_pointer_t = R (Args...) const volatile && noexcept(is_noexcept_v);
 };
 
@@ -215,7 +227,10 @@ struct function_traits<R (Args...) const volatile && noexcept(is_noexcept_v)> {
 template <class T> constexpr const static inline bool is_function_v = function_traits<T>::is_function_v;
 template <class T> constexpr const static inline bool is_nonthrow_function_v = function_traits<T>::is_noexcept_qualified_v;
 template <class T> constexpr const static inline bool is_function_cvref_qualified_v = function_traits<T>::is_cvref_qualified_v;
+
 template <class T> using Argslist_of_function_t = typename function_traits<T>::Argslist_t;
 template <class T, template <class...> class Op> using apply_function_args_to_t = typename function_traits<T>::template apply_args_to_t<Op>;
+
+template <class T> using ret_t_of_function = typename function_traits<T>::ret_t;
 } /* nxwheels */
 #endif
