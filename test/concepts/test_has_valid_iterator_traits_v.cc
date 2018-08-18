@@ -8,12 +8,17 @@ struct A {
     using reference         = int&;
     using iterator_category = std::input_iterator_tag;
 };
+struct should_fail1 {
+    using difference_type   = A;
+    using value_type        = int;
+    using pointer           = int*;
+    using reference         = int&;
+    using iterator_category = std::input_iterator_tag;
+};
 
 int main() {
-    static_assert(!has_valid_iterator_traits_member_type_v<int>);
+    static_assert(!has_valid_iterator_traits_v<should_fail1>);
 
-    static_assert(has_valid_iterator_traits_member_type_v<int*>);
-    static_assert(has_valid_iterator_traits_member_type_v<const int*>);
-
-    static_assert(has_valid_iterator_traits_member_type_v<A>);
+    static_assert(has_valid_iterator_traits_v<int*>);
+    static_assert(has_valid_iterator_traits_v<A>);
 }
