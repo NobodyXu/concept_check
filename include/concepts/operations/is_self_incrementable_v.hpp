@@ -6,7 +6,7 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-DEF_UN_CHECK(pre_increment, ++);
+DEF_UN_IMP_CONVERT_CHECK(pre_increment, ++, add_lvalue_reference_t<T>);
 
 template <class T> using post_incremented_t = decltype( declval<T>()++ );
 template <class T> constexpr const static inline bool is_post_incrementable_v = is_detected_implicitly_convertible_v<std::remove_reference_t<T>, post_incremented_t, T>;
