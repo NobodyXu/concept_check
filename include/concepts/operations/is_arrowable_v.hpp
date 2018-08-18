@@ -1,26 +1,59 @@
 #ifndef __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 # define __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 
+# include <type_traits>
+
 # include "../../function_traits.hpp"
+# include "../is_member_pointer.hpp"
 # include "../is_class_or_union_v.hpp"
+# include "is_callable_v.hpp"
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-template <class T> struct is_builtin_arrowable:     false_type {};
-template <class T> struct is_builtin_arrowable<T*>: bool_constant<is_class_or_union_v<T>> {};
-template <class T> constexpr const static inline bool is_builtin_arrowable_v = is_builtin_arrowable<T>::value;
+# define DEF_CONCEPT template <class T> constexpr const static inline bool
 
 template <class T> using member_function_arrow_overload_t          = decltype(&T::operator ->);
 template <class T> using member_function_arrow_template_overload_t = decltype(&T::template operator -> <>);
 
-template <class T> constexpr const static inline bool has_member_function_arrow_overload_v          = is_detected_v<member_function_arrow_overload_t, T>;
-template <class T> constexpr const static inline bool has_member_function_arrow_template_overload_v = is_detected_v<member_function_arrow_template_overload_t, T>;
+template <class T> using member_function_arrow_ret_t          = callable_result_t< pointed_to_by_member_pointer_t<member_function_arrow_overload_t<T>>* >;
+template <class T> using member_function_arrow_template_ret_t = callable_result_t< pointed_to_by_member_pointer_t<member_function_arrow_template_overload_t<T>>* >;
 
-template <class T>
-constexpr const static inline bool is_arrowable_v = is_builtin_arrowable_v<T> || has_member_function_arrow_overload_v<T> || has_member_function_arrow_template_overload_v<T>;
+DEF_CONCEPT has_builtin_arrow_overload_v                  = std::is_pointer<T>{}();
 
-template <class T> constexpr const static inline bool is_nothrow_arrowable_v = []{
-    if constexpr     (is_builtin_arrowable_v<T>)
+template <class T> struct is_builtin_arrowable:     false_type {};
+template <class T> struct is_builtin_arrowable<T*>: bool_constant<is_class_or_union_v<T>> {};
+DEF_CONCEPT is_builtin_arrowable_v = is_builtin_arrowable<T>::value;
+
+
+DEF_CONCEPT has_member_function_arrow_overload_v          = []{
+    if constexpr(is_detected_v<member_function_arrow_overload_t, T>)
+        return std::is_pointer<member_function_arrow_ret_t<T>>{}();
+    else
+        return false;
+}();
+DEF_CONCEPT has_member_function_arrow_template_overload_v = []{
+    if constexpr(is_detected_v<member_function_arrow_template_overload_t, T>)
+        return std::is_pointer<member_function_arrow_template_ret_t<T>>{}();
+    else
+        return false;
+}();
+
+DEF_CONCEPT is_member_function_arrowable_v = []{
+    if constexpr(has_member_function_arrow_overload_v<T>)
+        return is_class_or_union_v<std::remove_pointer_t<member_function_arrow_ret_t<T>>>;
+    else
+        return false;
+}();
+DEF_CONCEPT is_member_function_template_arrowable_v = []{
+    if constexpr(has_member_function_arrow_template_overload_v<T>)
+        return is_class_or_union_v<std::remove_pointer_t<member_function_arrow_template_ret_t<T>>>;
+    else
+        return false;
+}();
+
+DEF_CONCEPT has_arrowable_v = has_builtin_arrow_overload_v<T> || has_member_function_arrow_overload_v<T> || has_member_function_arrow_template_overload_v<T>;
+DEF_CONCEPT has_nothrow_arrowable_v = []{
+    if constexpr     (has_builtin_arrow_overload_v<T>)
         return true;
     else if constexpr(has_member_function_arrow_overload_v<T>)
         return is_nonthrow_function_v<member_function_arrow_overload_t<T>>;
@@ -30,6 +63,22 @@ template <class T> constexpr const static inline bool is_nothrow_arrowable_v = [
         return false;
 }();
 
+DEF_CONCEPT is_arrowable_v = is_builtin_arrowable_v<T> || is_member_function_arrowable_v<T> || is_member_function_template_arrowable_v<T>;
+DEF_CONCEPT is_nothrow_arrowable_v = []{
+    if constexpr     (is_builtin_arrowable_v<T>)
+        return true;
+    else if constexpr(is_member_function_arrowable_v<T>)
+        return is_nonthrow_function_v<member_function_arrow_overload_t<T>>;
+    else if constexpr(is_member_function_template_arrowable_v<T>)
+        return is_nonthrow_function_v<member_function_arrow_template_overload_t<T>>;
+    else
+        return false;
+}();
+
+# undef DEF_CONCEPT
+
+template <class T, class = std::enable_if_t<has_arrowable_v<T>>> using has_arrowable_t = T;
+template <class T, class = std::enable_if_t<has_nothrow_arrowable_v<T>>> using has_nothrow_arrowable_t = T;
 DEF_UN_CHECK_T(arrow);
 } /* nxwheels */
 

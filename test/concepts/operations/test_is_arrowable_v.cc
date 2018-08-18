@@ -41,17 +41,6 @@ struct H {
 };
 
 int main() {
-    // Test is_builtin_arrowable_v.
-    {
-
-        static_assert(!is_builtin_arrowable_v<void>);
-        static_assert(!is_builtin_arrowable_v<A>);
-        static_assert(!is_builtin_arrowable_v<int*>);
-
-        static_assert(is_builtin_arrowable_v<A*>);
-
-    }
-
     // Test is_member_function_arrow_overload_v.
     {
 
@@ -95,6 +84,7 @@ int main() {
         static_assert(!is_arrowable_v<void>);
         static_assert(!is_arrowable_v<A>);
         static_assert(!is_arrowable_v<int*>);
+        static_assert(!is_arrowable_v<H>);
 
         static_assert(is_arrowable_v<A*>);
         static_assert(is_arrowable_v<B>);
