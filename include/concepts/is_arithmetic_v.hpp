@@ -7,8 +7,6 @@
 
 # include <type_traits>
 
-# include "../add_reference.hpp"
-
 # include "operations/is_arithmetic_v.hpp"
 # include "operations/is_constructible_v.hpp"
 # include "operations/is_convertible_v.hpp"
@@ -19,7 +17,7 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-# define CHECK_OP(NAME) is_nothrow_## NAME ##able_v<T, T> && is_nothrow_## NAME ##_assignmentable_v<add_lvalue_reference_t<T>, add_lvalue_reference_t<T>>
+# define CHECK_OP(NAME) is_nothrow_## NAME ##able_v<T, T> && is_nothrow_## NAME ##_assignmentable_v<T&, T&>
 DEF_CONCEPT1 is_arithmetic_v = /* type requirement */
                                std::is_trivial<T>{}() &&
                                /* ctor requirement */
@@ -49,8 +47,8 @@ DEF_CONCEPT1 is_arithmetic_v = /* type requirement */
                                CHECK_OP(bitwise_left_shift) &&
                                CHECK_OP(bitwise_right_shift) &&
                                /* self inc/dec */
-                               is_self_incrementable_v<add_lvalue_reference_t<T>> &&
-                               is_self_decrementable_v<add_lvalue_reference_t<T>>;
+                               is_self_incrementable_v<T&> &&
+                               is_self_decrementable_v<T&>;
 # undef CHECK_OP
 
 DEF_CHECK1(arithmetic);
