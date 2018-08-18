@@ -15,8 +15,8 @@ namespace nxwheels {
 template <class T> using member_function_arrow_overload_t          = decltype(&T::operator ->);
 template <class T> using member_function_arrow_template_overload_t = decltype(&T::template operator -> <>);
 
-template <class T> using member_function_arrow_ret_t          = callable_result_t< pointed_to_by_member_pointer_t<member_function_arrow_overload_t<T>>* >;
-template <class T> using member_function_arrow_template_ret_t = callable_result_t< pointed_to_by_member_pointer_t<member_function_arrow_template_overload_t<T>>* >;
+template <class T> using member_function_arrow_ret_t          = ret_t_of_function< pointed_to_by_member_pointer_t<member_function_arrow_overload_t<T>> >;
+template <class T> using member_function_arrow_template_ret_t = ret_t_of_function< pointed_to_by_member_pointer_t<member_function_arrow_template_overload_t<T>> >;
 
 DEF_CONCEPT has_builtin_arrow_overload_v                  = std::is_pointer<T>{}();
 
