@@ -28,6 +28,17 @@ WRAPPER(RandomAccess, random_access);
 
 # undef WRAPPER
 # undef TRAITS
+
+DEF_CHECK1(Iterator);
+DEF_CHECK1(InputIterator);
+
+# define DEF_CHECK_LOCAL(NAME) DEF_CHECK1(NAME ##Iterator); DEF_CHECK1(const_## NAME ##Iterator); DEF_CHECK1(mutable_## NAME ##Iterator)
+
+DEF_CHECK_LOCAL(Forward);
+DEF_CHECK_LOCAL(Bidirectional);
+DEF_CHECK_LOCAL(RandomAccess);
+
+# undef DEF_CHECK_LOCAL
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"
