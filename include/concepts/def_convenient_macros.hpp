@@ -13,5 +13,5 @@
 #endif
 
 #ifndef DEF_CHECK1
-# define DEF_CHECK1(NAME) template <class T, class = std::enable_if_t<is_## NAME ##_v>> using NAME = T;
+# define DEF_CHECK1(NAME) template <class T, class = std::enable_if_t<is_## NAME ##_v<T>>> using NAME = T
 #endif
