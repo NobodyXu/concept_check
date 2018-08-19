@@ -72,12 +72,17 @@ template <class T> constexpr const static inline bool is_nothrow_dereferenceable
 ## Contribution
 I welcome anyone to contribute to this repository, and you can find me on Github or by email(displayed in my personal details on Github). If you have an issue, post it on Github Issues and I will repond to you as soon as possible.
 
-### Expected code style
+### Where to put the file?
+ * Concepts check whether member type alias exist should be put under ```/include/concepts/member```;
+ * Concepts cehck whether an operation on type is valid should be put under ```/include/concepts/operations```;
+ * Concepts check whether a type statisfy C++ naming requirement like ```iterator``` should be put under ```/include/concepts/```.
+
+### Requirements when writing code
  1. Use macros defined in ```def_convenient_macros.hpp``` in the current dir to simplify the process of defining concepts and define new ones in the file if necessary. **The new macros should be put into the ```def_convenient_macros.hpp``` in the current dir and a ```#undef``` should be put in the ```undef_convenient_macros.hpp``` in the current dir.**
  2. Every ```*.hpp``` file should have ```#define``` guard like this ```__nobodyxu_concept_check_($DIR_TO_THE_FILE)_($FILE_NAME)_HPP__```(Note: There should be no ```/``` but ```_``` in the guard).
  3. When including files, include ```STL``` first, then files from subdir, files from the current dir and finally the files from the parent dir. The includes should be in alphabetical order. A file can be omitted if other included files include that file. **However, if the file defines macros that help writing concepts(Ex ```/include/concepts/def_convenient_macros.hpp```), it should be the last to be included and at the end of the file before the end of the ```#endif``` guard, a ```undef_convenient_macros.hpp``` should be included.**
  4. Try to include as less as you can and use C++ language feature if possible.
  5. If you have to invent a new wheel, put it under ```/include/```.
  6. All concepts should be put under namespace ```nxwheels```. The ```using``` alias used to check the concept and the nothrow concepts impl checking whether ```noexcept(ACTIONS)``` is true should be put under namespace ```nxwheels``` for extendability(other might use ```using``` alias to check the returned type of an operation and use the nothrow concepts impl because they have checked the expression elsewhere).
- 7.
+ 7. Concepts defined in ```/include/concepts/operations``` should be able to handle reference while concepts defined in other places don't.
  8. If you can extract the pattern of the concepts defined to make it more readable(Ex in ```/include/concepts/operations/is_arithmetic_v.hpp```), then you should extract it even at the cost of using ```macro``` as long as you ```#undef``` it at the end of the file before the ```#endif``` guard.
