@@ -75,7 +75,7 @@ I welcome anyone to contribute to this repository, and you can find me on Github
 ### Where to put the file?
  * Concepts check whether member type alias exist should be put under ```/include/concepts/member```;
  * Concepts cehck whether an operation on type is valid should be put under ```/include/concepts/operations```;
- * Concepts check whether a type statisfy C++ naming requirement like ```iterator``` should be put under ```/include/concepts/```.
+ * Concepts check whether a type statisfy combined concepts(concepts check more than 1 operations or member) like ```iterator``` should be put under ```/include/concepts/```.
 
 ### Requirements when writing code
  1. Use macros defined in ```def_convenient_macros.hpp``` in the current dir to simplify the process of defining concepts and define new ones in the file if necessary. **The new macros should be put into the ```def_convenient_macros.hpp``` in the current dir and a ```#undef``` should be put in the ```undef_convenient_macros.hpp``` in the current dir.**
