@@ -3,7 +3,7 @@ language: cpp
 addons:
   apt:
     sources:
-      - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main'
+      - sourceline: 'deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-5.0 main'
     packages:
       - clang-5.0
       - clang++-5.0
