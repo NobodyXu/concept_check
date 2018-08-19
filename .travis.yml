@@ -1,0 +1,12 @@
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main'
+    packages:
+      - clang-5.0
+      - clang++-5.0
+
+script:
+  - make Test CXX=clang++-5.0 -j
