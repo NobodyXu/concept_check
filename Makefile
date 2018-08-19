@@ -5,19 +5,19 @@ install: include
 	cp include /usr/include/concept_check
 precompile: include
 	cd include						 \
-	$(CXX) -std=c++14 *.hpp\
+	$(CXX) -std=c++17 *.hpp\
 	cd concepts						 \
-	$(CXX) -std=c++14 *.hpp\
+	$(CXX) -std=c++17 *.hpp\
 	cd member							 \
-	$(CXX) -std=c++14 *.hpp\
+	$(CXX) -std=c++17 *.hpp\
 	cd ../operations			 \
-	$(CXX) -std=c++14 *.hpp
+	$(CXX) -std=c++17 *.hpp
 Test: include test
 	cd test												\
-	$(CXX) -std=c++14 -c test_*.cc\
+	$(CXX) -std=c++17 -c test_*.cc\
 	cd concepts										\
-	$(CXX) -std=c++14 -c test_*.cc\
+	$(CXX) -std=c++17 -c test_*.cc\
 	cd member											\
-	$(CXX) -std=c++14 -c test_*.cc\
+	$(CXX) -std=c++17 -c test_*.cc\
 	cd ../operations							\
-	$(CXX) -std=c++14 -c test_*.cc
+	$(CXX) -std=c++17 -c test_*.cc

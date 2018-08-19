@@ -21,7 +21,7 @@ auto func2(It &&) -> std::enable_if_t< is_Iterator_v<std::remove_reference_t<It>
 ```
 
 ## Goal of the library
-I created this library due to my hate for the ugly and disturbed syntex of ```The Boost Concept Check library```. It forces you to use ```BOOST_CONCEPT_REQUIRES``` which requires you to put your return type into it, or use ```BOOST_CONCEPT_ASSERT```. What's more, the way to extend it is quite strange to me -- you create another class in lines to check it.
+I created this library due to my hate for the ugly and disturbed syntex of ```The Boost Concept Check library```. It forces you to use ```BOOST_CONCEPT_REQUIRES``` which requires you to put your return type into it, or use ```BOOST_CONCEPT_ASSERT```. What's more, the way to extend it is quite strange to me -- you create another class in many lines to check it.
 
 This library is intended to be clear in syntex and reusable and let users have freedom on how concepts are checked in their program.
 
@@ -48,6 +48,20 @@ Most of the oncepts under ```/include/concepts/operations/``` are intended to be
 ## How this library works
 Most of the concepts defined in this library use ```declval``` defined in ```/include/utility.hpp``` to "get" instance of a type in an unevaluated context and class template ```is_detected_v``` in ```/include/detector_core.hpp``` to check whether an expression is valid. ```is_detected_v``` is a library fundamentals TS v2 feature, you can find more description of it at [here](https://en.cppreference.com/w/cpp/experimental/is_detected). My detector is compliant to its API.
 
+An example of how concept check works:
+
+```c++
+template <class T> using dereferenced_t = decltype(*declval<T>());
+template <class T> constexpr const static inline bool is_dereferenceable_v = is_detected_v<dereferenced_t, T>;
+template <class T> constexpr const static inline bool is_nothrow_dereferenceable_impl_v = noexcept(*declval<T>());
+template <class T> constexpr const static inline bool is_nothrow_dereferenceable_v = []{
+  if constexpr(is_dereferenceable_v<T>)
+    return is_nothrow_dereferenceable_impl_v<T>;
+  else
+    return false;
+}();
+```
+
 ## Reason why some of the utility and concepts are rewriten here despite ```STL``` has defined them
  1. The code from ```libstdc++``` keep emitting nonsense errors(std::declval keep giving out errors due to a fail in static_assert that checks for use in evaluated context);
  2. They haven't got the feature I want(std::add_reference in ```libstdc++``` won't work correctly for ```int () &``` because that is a ```C++17``` feature);
@@ -56,3 +70,13 @@ Most of the concepts defined in this library use ```declval``` defined in ```/in
 
 ## Contribution
 I welcome anyone to contribute to this repository, and you can find me on Github or by email(displayed in my personal details on Github). If you have an issue, post it on Github Issues and I will repond to you as soon as possible.
+
+### Expected code style
+ 1. Use macros defined in ```def_convenient_macros.hpp``` in the current dir to simplify the process of defining concepts and define new ones in the file if necessary. **The new macros should be put into the ```def_convenient_macros.hpp``` in the current dir and a ```#undef``` should be put in the ```undef_convenient_macros.hpp``` in the current dir.**
+ 2. Every ```*.hpp``` file should have ```#define``` guard like this ```__nobodyxu_concept_check_($DIR_TO_THE_FILE)_($FILE_NAME)_HPP__```(Note: There should be no ```/``` but ```_``` in the guard).
+ 3. When including files, include ```STL``` first, then files from subdir, files from the current dir and finally the files from the parent dir. The includes should be in alphabetical order. A file can be omitted if other included files include that file. **However, if the file defines macros that help writing concepts(Ex ```/include/concepts/def_convenient_macros.hpp```), it should be the last to be included and at the end of the file before the end of the ```#endif``` guard, a ```undef_convenient_macros.hpp``` should be included.**
+ 4. Try to include as less as you can and use C++ language feature if possible.
+ 5. If you have to invent a new wheel, put it under ```/include/```.
+ 6. All concepts should be put under namespace ```nxwheels```. The ```using``` alias used to check the concept and the nothrow concepts impl checking whether ```noexcept(ACTIONS)``` is true should be put under namespace ```nxwheels``` for extendability(other might use ```using``` alias to check the returned type of an operation and use the nothrow concepts impl because they have checked the expression elsewhere).
+ 7. 
+ 6. If you can extract the pattern of the concepts defined to make it more readable(Ex in ```/include/concepts/operations/is_arithmetic_v.hpp```), then you should extract it even at the cost of using ```macro``` as long as you ```#undef``` it at the end of the file before the ```#endif``` guard.
