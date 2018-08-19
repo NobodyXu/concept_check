@@ -86,3 +86,6 @@ I welcome anyone to contribute to this repository, and you can find me on Github
  6. All concepts should be put under namespace ```nxwheels```. The ```using``` alias used to check the concept and the nothrow concepts impl checking whether ```noexcept(ACTIONS)``` is true should be put under namespace ```nxwheels``` for extendability(other might use ```using``` alias to check the returned type of an operation and use the nothrow concepts impl because they have checked the expression elsewhere).
  7. Concepts defined in ```/include/concepts/operations``` should be able to handle reference while concepts defined in other places don't.
  8. If you can extract the pattern of the concepts defined to make it more readable(Ex in ```/include/concepts/operations/is_arithmetic_v.hpp```), then you should extract it even at the cost of using ```macro``` as long as you ```#undef``` it at the end of the file before the ```#endif``` guard.
+
+ ### Release
+ This repository use [Semantic Versioning 2.0.0](https://semver.org/).
