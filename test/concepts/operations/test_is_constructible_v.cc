@@ -91,15 +91,16 @@ int main() {
 
     // Test is_initializer_list_constructible_v.
     static_assert(!is_initializer_list_constructible_v<int, int>);
+    static_assert(!is_initializer_list_constructible_v<std::initializer_list<int>>);
+    static_assert(!is_initializer_list_constructible_v<initializer_list_constructible>);
+    static_assert(!is_initializer_list_constructible_v<initializer_list_constructible, initializer_list_constructible>);
 
-    static_assert(is_initializer_list_constructible_v<std::initializer_list<int>>);
     static_assert(is_initializer_list_constructible_v<std::initializer_list<int>, int, char>);
-    static_assert(is_initializer_list_constructible_v<initializer_list_constructible>);
     static_assert(is_initializer_list_constructible_v<initializer_list_constructible, int, char>);
 
     // Test is_nothrow_initializer_list_constructible_v.
     static_assert(!is_nothrow_initializer_list_constructible_v<int, int>);
+    static_assert(!is_nothrow_initializer_list_constructible_v<nothrow_initializer_list_constructible>);
 
-    static_assert(is_nothrow_initializer_list_constructible_v<nothrow_initializer_list_constructible>);
     static_assert(is_nothrow_initializer_list_constructible_v<nothrow_initializer_list_constructible, int, char>);
 }
