@@ -1,11 +1,10 @@
 language: cpp
 
-before_install:
-  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
 addons:
   apt:
     sources:
       - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main'
+      key_url: https://apt.llvm.org/llvm-snapshot.gpg.key
     packages:
       - clang-5.0
       - clang++-5.0
