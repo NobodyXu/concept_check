@@ -1,4 +1,4 @@
-# include <type_traits>
+# include "../../enable_if.hpp"
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
 # include "../../utility.hpp"
@@ -62,8 +62,8 @@ template <class T1, class T2> constexpr const static inline bool is_nothrow_## N
 #endif
 
 #ifndef DEF_UN_CHECK_T_IMPL_IMPL
-# define DEF_UN_CHECK_T_IMPL_IMPL(NAME)                                              \
-template <class T, class = std::enable_if_t<is_## NAME ##_v<T>>> using NAME ##_t = T
+# define DEF_UN_CHECK_T_IMPL_IMPL(NAME)                                         \
+template <class T, class = enable_if_t<is_## NAME ##_v<T>>> using NAME ##_t = T
 #endif
 
 #ifndef DEF_UN_CHECK_T_IMPL
@@ -75,8 +75,8 @@ template <class T, class = std::enable_if_t<is_## NAME ##_v<T>>> using NAME ##_t
 #endif
 
 #ifndef DEF_BIN_CHECK_T_IMPL_IMPL
-# define DEF_BIN_CHECK_T_IMPL_IMPL(NAME)                                                              \
-template <class T1, class T2, class = std::enable_if_t<is_## NAME ##_v<T1, T2>>> using NAME ##_t = T1;
+# define DEF_BIN_CHECK_T_IMPL_IMPL(NAME)                                                         \
+template <class T1, class T2, class = enable_if_t<is_## NAME ##_v<T1, T2>>> using NAME ##_t = T1
 #endif
 
 #ifndef DEF_BIN_CHECK_T_IMPL
@@ -88,8 +88,8 @@ template <class T1, class T2, class = std::enable_if_t<is_## NAME ##_v<T1, T2>>>
 #endif
 
 #ifndef DEF_T_ARGS_CHECK_T_IMPL_IMPL
-# define DEF_T_ARGS_CHECK_T_IMPL_IMPL(NAME)                                                                                                             \
-template <class T, class para_tuple, class = std::enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME, T), para_tuple>::value> > using NAME ##_t_impl = T;\
+# define DEF_T_ARGS_CHECK_T_IMPL_IMPL(NAME)                                                                                                        \
+template <class T, class para_tuple, class = enable_if_t<apply_to_t<PARTIAL_APPLY_T(is_## NAME, T), para_tuple>::value> > using NAME ##_t_impl = T;\
 template <class T, class ...Args> using NAME ##_t = NAME ##_t_impl<T, type_tuple<Args...>>;
 #endif
 

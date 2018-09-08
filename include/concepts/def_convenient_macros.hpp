@@ -1,4 +1,4 @@
-#include <type_traits>
+#include "../enable_if.hpp"
 
 #ifndef VAR
 # define VAR constexpr const static inline bool
@@ -13,5 +13,5 @@
 #endif
 
 #ifndef DEF_CHECK1
-# define DEF_CHECK1(NAME) template <class T, class = std::enable_if_t< is_## NAME ##_v<std::remove_reference_t<T>> >> using NAME = T
+# define DEF_CHECK1(NAME) template <class T, class = enable_if_t< is_## NAME ##_v<std::remove_reference_t<T>> >> using NAME = T
 #endif
