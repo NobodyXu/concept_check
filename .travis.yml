@@ -1,5 +1,6 @@
 language: cpp
-
+python:
+  - "3.6"
 addons:
   apt:
     sources:

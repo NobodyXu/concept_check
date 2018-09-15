@@ -1,13 +1,20 @@
 #!/usr/bin/python3
 
-import os
 import glob
+import os
+import sys
 import subprocess
 
 def invoke(*args):
     print(*args)
     subprocess.run(*args, check = True)
+def get_cxx():
+    if len(sys.argv) == 2:
+        return sys.argv[1]
+    else:
+        return os.environ["CXX"]
 
+cxx = get_cxx()
 repo = os.path.dirname(os.path.realpath(__file__))
 test = repo + "/test/"
 
