@@ -12,4 +12,4 @@ addons:
       - python3.5
 
 script:
-  - ./test.py clang++-5.0
+  - python3.5 test.py clang++-5.0
