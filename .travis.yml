@@ -9,7 +9,7 @@ addons:
     packages:
       - clang-5.0
       - clang++-5.0
-      - python3.6
+      - python3.5
 
 script:
   - ./test.py clang++-5.0
