@@ -10,6 +10,7 @@ addons:
       - clang-5.0
       - clang++-5.0
       - python3.5
+      - libstdc++6
 
 script:
   - python3.5 test.py clang++-5.0
