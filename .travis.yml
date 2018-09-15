@@ -1,5 +1,6 @@
 language: cpp
-
+python:
+  - "3.6"
 addons:
   apt:
     sources:
@@ -8,6 +9,7 @@ addons:
     packages:
       - clang-5.0
       - clang++-5.0
+      - python3.5
 
 script:
-  - ./test.py
+  - python3.5 test.py clang++-5.0
