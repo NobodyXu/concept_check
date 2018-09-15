@@ -11,4 +11,4 @@ addons:
       - clang++-5.0
 
 script:
-  - ./test.py
+  - ./test.py clang++-5.0
