@@ -21,4 +21,4 @@ test = repo + "/test/"
 for relative_path in ["/", "/concepts/operations/", "/concepts/member/", "/concepts/"]:
     # Since the test in this repository just do some compile-time checking, so it is only compiled to *.o.
     # By doing this, calls to the compiler can be chained.
-    invoke([CXX, "-std=c++17", "-c"] + glob.glob(test + relative_path + "*.cc"))
+    invoke([cxx, "-std=c++17", "-c"] + glob.glob(test + relative_path + "*.cc"))
