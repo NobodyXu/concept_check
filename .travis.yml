@@ -7,10 +7,10 @@ addons:
       - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main'
         key_url: https://apt.llvm.org/llvm-snapshot.gpg.key
     packages:
+      - libstdc++6
       - clang-5.0
       - clang++-5.0
       - python3.5
-      - libstdc++6
 
 script:
   - python3.5 test.py clang++-5.0
