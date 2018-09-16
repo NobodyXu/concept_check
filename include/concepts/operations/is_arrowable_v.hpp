@@ -2,8 +2,10 @@
 # define __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 
 # include "../../function_traits.hpp"
-# include "../is_member_pointer.hpp"
+
+# include "../is_builtin_pointer.hpp"
 # include "../is_class_or_union_v.hpp"
+
 # include "is_callable_v.hpp"
 
 # include "def_convenient_macros.hpp"
@@ -17,7 +19,7 @@ template <class T> using member_function_arrow_template_overload_t = decltype(&T
 template <class T> using member_function_arrow_ret_t          = ret_t_of_function< pointed_to_by_member_pointer_t<member_function_arrow_overload_t<T>> >;
 template <class T> using member_function_arrow_template_ret_t = ret_t_of_function< pointed_to_by_member_pointer_t<member_function_arrow_template_overload_t<T>> >;
 
-DEF_CONCEPT has_builtin_arrow_overload_v                  = std::is_pointer<T>{}();
+DEF_CONCEPT has_builtin_arrow_overload_v                  = is_builtin_pointer_v<T> && !is_function_v<pointed_to_by_pointer_t<T>>;
 
 template <class T> struct is_builtin_arrowable:     false_type {};
 template <class T> struct is_builtin_arrowable<T*>: bool_constant<is_class_or_union_v<T>> {};
