@@ -5,7 +5,6 @@
 # include <iterator>
 
 # include "operations/is_arithmetic_v.hpp"
-# include "operations/is_arrowable_v.hpp"
 # include "operations/is_constructible_v.hpp"
 # include "operations/is_dereferenceable_v.hpp"
 # include "operations/is_comparable_v.hpp"
@@ -24,8 +23,7 @@ DEF_CONCEPT1 is_Iterator_core_v = is_copy_constructible_v<T>     &&
                                   is_self_incrementable_v<T&>;
 
 DEF_CONCEPT1 is_InputIterator_core_v         = is_Iterator_core_v<T> &&
-                                               is_EqualityCompareable_v<T> && is_InEqualityCompareable_v<T> &&
-                                               has_arrowable_v<T>;
+                                               is_EqualityCompareable_v<T> && is_InEqualityCompareable_v<T>;
 DEF_CONCEPT1 is_ForwardIterator_core_v       = is_InputIterator_core_v<T>  && is_default_constructible_v<T>;
 DEF_CONCEPT1 is_BidirectionalIterator_core_v = is_ForwardIterator_core_v<T> && is_self_decrementable_v<T&>;
 
