@@ -2,7 +2,6 @@
 # define __nobodyxu_concept_check_is_constructible_v_HPP__
 
 # include <new>
-# include <type_traits>
 
 # include "../../partial_apply.hpp"
 # include "../../type_tuple.hpp"
