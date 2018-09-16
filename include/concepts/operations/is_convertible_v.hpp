@@ -1,8 +1,9 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_convertible_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_convertible_v_HPP__
 
-# include <type_traits>
+# include "../is_same.hpp"
 # include "is_callable_core.hpp"
+
 # define DONT_USE_DETECTOR_V
 # include "def_convenient_macros.hpp"
 
@@ -11,7 +12,7 @@ template <class T> constexpr const static inline auto lambda_for_implicit_conver
 template <class T> using lambda_for_implicit_conversion_t = decltype(lambda_for_implicit_conversion<T>);
 
 template <class From, class To> constexpr const static inline bool is_implicitly_convertible_v = []{
-    if constexpr(std::is_void<To>::value)
+    if constexpr(is_same_v<To, void>)
         return true;
     else
         return is_callable_v<lambda_for_implicit_conversion_t<To>, From>;
