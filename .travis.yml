@@ -8,11 +8,15 @@ addons:
     packages:
       - gcc-6
       - g++-6
+      - libstdc++6
       - clang-5.0
       - clang++-5.0
       - python3.5
 
 sudo: required
 script:
-  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+  - g++ --version
+  - ls /usr/lib32/libstdc++.so.*
   - python3.5 test.py clang++-5.0
