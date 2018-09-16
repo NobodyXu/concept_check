@@ -3,72 +3,26 @@ using namespace nxwheels;
 
 struct C {};
 struct A {
-    A() = default;
-    A(const A&) = default;
-    A(A&&) = default;
-    constexpr A(const C&) {}
+    A(const C&) {}
 };
 struct A1 {
-    A1() = default;
-    constexpr explicit A1(const C&) {}
+    A1(const C&) noexcept {}
 };
-struct B {
-    constexpr operator A ()       noexcept { return {}; }
-    constexpr operator C () const noexcept { return {}; }
-};
-struct D {
-    D() = default;
-    D(const D&) = delete;
-    D(D&&) = delete;
-};
-
-# define DEF_ASSERT(CONVERT)                      \
-template <class From, class To>                   \
-constexpr void assert_## CONVERT () noexcept {    \
-    static_assert(is_## CONVERT ##_v<From, To>);  \
-}                                                 \
-template <class From, class To>                   \
-struct assert_## CONVERT ##_t {                   \
-    static_assert(is_## CONVERT ##_v<From, To>);  \
-};                                                \
-                                                  \
-template <class From, class To>                   \
-constexpr void assert_not_## CONVERT () noexcept {\
-    static_assert(!is_## CONVERT ##_v<From, To>); \
-}                                                 \
-template <class From, class To>                   \
-struct assert_not_## CONVERT ##_t {               \
-    static_assert(!is_## CONVERT ##_v<From, To>); \
-}
-
-DEF_ASSERT(implicitly_convertible);
-DEF_ASSERT(nothrow_implicitly_convertible);
 
 int main() {
     // Test is_implicitly_convertible_v.
     {
-        assert_implicitly_convertible<int, int>();
-        assert_implicitly_convertible<char, int>();
+        static_assert(is_implicitly_convertible_v<int, int>);
+        static_assert(is_implicitly_convertible_v<C, C>);
 
-        assert_implicitly_convertible<B, A>();
-        assert_not_implicitly_convertible<const B, A>();
+        static_assert(is_implicitly_convertible_v<char, int>);
 
-        assert_implicitly_convertible<C, A>();
-        assert_implicitly_convertible<const C, A>();
-        assert_implicitly_convertible<B, C>();
-        assert_implicitly_convertible<const B, C>();
-
-        assert_implicitly_convertible<D, D>();
-        assert_implicitly_convertible<void, void>();
-
-        assert_not_implicitly_convertible<void, int>();
-        assert_not_implicitly_convertible<int, A>();
-        assert_not_implicitly_convertible<C, A1>();
+        static_assert(is_implicitly_convertible_v<C, A>);
     }
 
     // Test is_nothrow_implicitly_convertible_v.
     {
-        assert_nothrow_implicitly_convertible<B, A>();
-        assert_not_nothrow_implicitly_convertible<C, A>();
+        static_assert(is_nothrow_implicitly_convertible_v<C, A1>);
+        static_assert(!is_nothrow_implicitly_convertible_v<C, A>);
     }
 }
