@@ -6,7 +6,7 @@ import sys
 import subprocess
 
 def invoke(*args):
-    print(*args)
+    print(*args, flush = True)
     subprocess.run(*args, check = True)
 def get_cxx():
     if len(sys.argv) == 2:
