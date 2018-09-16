@@ -2,6 +2,7 @@
 # define __nobodyxu_concept_check_concepts_operations_is_swappable_v_HPP__
 
 # include "../is_referenceable_v.hpp"
+
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {

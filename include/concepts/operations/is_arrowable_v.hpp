@@ -1,12 +1,11 @@
 #ifndef __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 # define __nobodxu_concept_check_concepts_operations_is_arrowable_v_HPP__
 
-# include <type_traits>
-
 # include "../../function_traits.hpp"
 # include "../is_member_pointer.hpp"
 # include "../is_class_or_union_v.hpp"
 # include "is_callable_v.hpp"
+
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
@@ -77,8 +76,8 @@ DEF_CONCEPT is_nothrow_arrowable_v = []{
 
 # undef DEF_CONCEPT
 
-template <class T, class = std::enable_if_t<has_arrowable_v<T>>> using has_arrowable_t = T;
-template <class T, class = std::enable_if_t<has_nothrow_arrowable_v<T>>> using has_nothrow_arrowable_t = T;
+template <class T, class = enable_if_t<has_arrowable_v<T>>> using has_arrowable_t = T;
+template <class T, class = enable_if_t<has_nothrow_arrowable_v<T>>> using has_nothrow_arrowable_t = T;
 DEF_UN_CHECK_T(arrow);
 } /* nxwheels */
 

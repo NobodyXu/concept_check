@@ -1,8 +1,8 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_self_decrementable_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_self_decrementable_v_HPP__
 
-# include <type_traits>
 # include "../../add_reference.hpp"
+
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {

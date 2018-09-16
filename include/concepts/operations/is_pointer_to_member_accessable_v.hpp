@@ -1,8 +1,9 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_pointer_to_member_accessable_v_HPP__
 
-# include "def_convenient_macros.hpp"
 # include "../is_member_pointer.hpp"
+
+# include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 template <class T, class P> using pointer_to_data_member_accessed_t = decltype( declval<T>()->*declval<P>() );
