@@ -8,11 +8,10 @@ struct A {
 
 int main() {
     static_assert(!has_member_MEMBER_TYPE_v<void>);
+
     static_assert(!has_member_MEMBER_TYPE_v<int>);
+
     static_assert(!has_member_MEMBER_TYPE_v<S>);
-    static_assert(!has_member_MEMBER_TYPE_v<U>);
-    static_assert(!has_member_MEMBER_TYPE_v<unscoped_e>);
-    static_assert(!has_member_MEMBER_TYPE_v<scoped_e>);
 
     static_assert(has_member_MEMBER_TYPE_v<A>);
 }

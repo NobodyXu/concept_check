@@ -2,18 +2,12 @@
 using namespace nxwheels;
 
 struct NoOp {};
-struct Tag {};
+
 struct A {
     void operator [] (int) {}
 };
-struct B {
-    void operator [] (Tag) {}
-};
 struct C {
     void operator [] (int) noexcept {}
-};
-struct D {
-    void operator [] (Tag) noexcept {}
 };
 
 int main() {
@@ -21,15 +15,13 @@ int main() {
     {
 
         static_assert(!is_subscriptable_v<int, int>);
+        static_assert(!is_subscriptable_v<NoOp, NoOp>);
+        static_assert(!is_subscriptable_v<A, NoOp>);
 
-        static_assert(is_subscriptable_v<int[2333], int>);
         static_assert(is_subscriptable_v<int[], int>);
         static_assert(is_subscriptable_v<int*, int>);
 
         static_assert(is_subscriptable_v<A, int>);
-        static_assert(is_subscriptable_v<B, Tag>);
-        static_assert(is_subscriptable_v<C, int>);
-        static_assert(is_subscriptable_v<D, Tag>);
 
     }
 
@@ -37,15 +29,11 @@ int main() {
     {
 
         static_assert(!is_nothrow_subscriptable_v<int, int>);
-        static_assert(!is_nothrow_subscriptable_v<A, int>);
-        static_assert(!is_nothrow_subscriptable_v<B, Tag>);
 
-        static_assert(is_nothrow_subscriptable_v<int[2333], int>);
         static_assert(is_nothrow_subscriptable_v<int[], int>);
         static_assert(is_nothrow_subscriptable_v<int*, int>);
 
         static_assert(is_nothrow_subscriptable_v<C, int>);
-        static_assert(is_nothrow_subscriptable_v<D, Tag>);
 
     }
 

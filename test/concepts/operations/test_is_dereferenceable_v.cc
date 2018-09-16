@@ -16,6 +16,7 @@ int main() {
     {
 
         static_assert(!is_dereferenceable_v<int>);
+        static_assert(!is_dereferenceable_v<S>);
 
         static_assert(is_dereferenceable_v<int*>);
         static_assert(is_dereferenceable_v<S0>);
@@ -27,6 +28,7 @@ int main() {
     {
 
         static_assert(!is_nothrow_dereferenceable_v<int>);
+        static_assert(!is_nothrow_dereferenceable_v<S>);
         static_assert(!is_nothrow_dereferenceable_v<S0>);
 
         static_assert(is_nothrow_dereferenceable_v<int*>);

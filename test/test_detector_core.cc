@@ -1,4 +1,3 @@
-#include <utility>
 #include <type_traits>
 #include "../include/detector_core.hpp"
 using namespace nxwheels;

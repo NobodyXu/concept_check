@@ -1,8 +1,6 @@
 #ifndef __nobodyxu_concept_check_concepts_operations_is_callable_v_HPP__
 # define __nobodyxu_concept_check_concepts_operations_is_callable_v_HPP__
 
-# include <type_traits>
-
 # include "../is_same.hpp"
 # include "is_callable_core.hpp"
 # include "is_convertible_v.hpp"
