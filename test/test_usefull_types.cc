@@ -4,6 +4,6 @@
 using namespace nxwheels;
 
 int main() {
-    static_assert(std::is_same<std::size_t, size_t>{}());
-    static_assert(std::is_same<std::ptrdiff_t, ptrdiff_t>{}());
+    static_assert(std::is_same<std::size_t, size_t>::value);
+    static_assert(std::is_same<std::ptrdiff_t, ptrdiff_t>::value);
 }
