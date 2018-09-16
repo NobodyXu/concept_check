@@ -1,7 +1,7 @@
 #ifndef __nobodyxu_concept_check_type_tuple_HPP__
 # define __nobodyxu_concept_check_type_tuple_HPP__
 
-# include <type_traits>
+# include "enable_if.hpp"
 # include "usefull_types.hpp"
 
 namespace nxwheels {
@@ -23,7 +23,7 @@ struct get_type_impl<index, type_tuple<T, Args...>> { using type = typename get_
 template <class T, class ...Args>
 struct get_type_impl<0, type_tuple<T, Args...>> { using type = T; };
 
-template <size_t index, class T> using get_type_t = std::enable_if_t<index < T::size, typename get_type_impl<index, T>::type>;
+template <size_t index, class T> using get_type_t = enable_if_t<index < T::size, typename get_type_impl<index, T>::type>;
 
 template <template <class...> class, class> struct apply_to;
 template <template <class...> class applicant, class ...Args>

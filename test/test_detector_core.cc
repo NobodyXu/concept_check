@@ -18,8 +18,8 @@ int main() {
     static_assert(!is_detected_v<dereference, int>);
 
     // Test detected_t.
-    static_assert(std::is_same<detected_t<dereference, int>, nonsuch>{}());
-    static_assert(std::is_same<detected_t<dereference, int*>, decltype(*std::declval<int*>())>{}());
+    static_assert(std::is_same<detected_t<dereference, int>, nonsuch>::value);
+    static_assert(std::is_same<detected_t<dereference, int*>, decltype(*std::declval<int*>())>::value);
 
     // Text detected_or_t.
     static_assert(std::is_same<detected_or_t<void, dereference, int>, void>::value);
