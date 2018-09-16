@@ -30,7 +30,6 @@ int main() {
         static_assert(is_addressable_v<int&>);
         static_assert(is_addressable_v<int*&>);
         static_assert(is_addressable_v<S0>);
-        static_assert(is_addressable_v<S1>);
         static_assert(is_addressable_v<S2>);
 
     }
@@ -48,9 +47,7 @@ int main() {
 
     // Test addressable_t.
     {
-
         //F(S{});
         F(S0{});
-
     }
 }
