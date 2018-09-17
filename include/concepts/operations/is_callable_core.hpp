@@ -3,6 +3,7 @@
 
 # define DONT_USE_DETECTOR_V
 # include "def_convenient_macros.hpp"
+# undef  DONT_USE_DETECTOR_V
 
 namespace nxwheels {
 # define DEF_TMP template <class T, class ...Args>

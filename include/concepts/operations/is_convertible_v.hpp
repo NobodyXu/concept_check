@@ -6,6 +6,7 @@
 
 # define DONT_USE_DETECTOR_V
 # include "def_convenient_macros.hpp"
+# undef  DONT_USE_DETECTOR_V
 
 namespace nxwheels {
 template <class T> constexpr const static inline auto lambda_for_implicit_conversion = [](T) noexcept {};
