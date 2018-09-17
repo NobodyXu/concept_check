@@ -29,6 +29,6 @@ DEF_TMP using callable_result_t = detected_t<called_ret_t, T, Args...>;
 DEF_T_ARGS_CHECK_T(call);
 } /* nxwheels */
 
-# include "def_convenient_macros.hpp"
+# include "undef_convenient_macros.hpp"
 
 #endif

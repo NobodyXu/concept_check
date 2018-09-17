@@ -28,6 +28,6 @@ DEF_UN_CHECK_T(post_decrement);
 DEF_UN_CHECK_T(self_decrement);
 } /* nxwheels */
 
-# include "def_convenient_macros.hpp"
+# include "undef_convenient_macros.hpp"
 
 #endif

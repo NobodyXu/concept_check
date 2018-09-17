@@ -65,6 +65,6 @@ template <class T, class P> constexpr const static inline bool is_nothrow_pointe
 DEF_BIN_CHECK_T(pointer_to_member_access);
 } /* nxwheels */
 
-# include "def_convenient_macros.hpp"
+# include "undef_convenient_macros.hpp"
 
 #endif
