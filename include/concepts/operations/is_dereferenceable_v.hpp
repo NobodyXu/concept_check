@@ -11,7 +11,7 @@ DEF_UN_CHECK(dereference, *);
 
 template <class T> using dereferenced_or_nonsuch_t = detected_or_t<nonsuch, dereferenceed_ret_t, T>;
 
-# define DEF_CONCEPT template <class T, class Ret> constexpr const static inline bool
+# define DEF_CONCEPT template <class T, class Ret> CONCEPT_T
 
 DEF_CONCEPT is_exact_dereferenceable_v         = is_same_v<dereferenced_or_nonsuch_t<T>, Ret>;
 DEF_CONCEPT is_nothrow_exact_dereferenceable_v = is_nothrow_dereferenceable_v<T> && is_exact_dereferenceable_v<T, Ret>;

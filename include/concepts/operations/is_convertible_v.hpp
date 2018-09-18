@@ -9,10 +9,10 @@
 # undef  DONT_USE_DETECTOR_V
 
 namespace nxwheels {
-template <class T> constexpr const static inline auto lambda_for_implicit_conversion = [](T) noexcept {};
+template <class T> CONSTEXPR_GLOBAL_VAR auto lambda_for_implicit_conversion = [](T) noexcept {};
 template <class T> using lambda_for_implicit_conversion_t = decltype(lambda_for_implicit_conversion<T>);
 
-template <class From, class To> constexpr const static inline bool is_implicitly_convertible_v = []{
+template <class From, class To> CONCEPT_T is_implicitly_convertible_v = []{
     if constexpr(is_same_v<To, void>)
         return true;
     else
@@ -20,8 +20,8 @@ template <class From, class To> constexpr const static inline bool is_implicitly
 }();
 
 template <class From, class To>
-constexpr const static inline bool is_nothrow_implicitly_convertible_impl_v = noexcept( lambda_for_implicit_conversion<To>(declval<From>()) );
-template <class From, class To> constexpr const static inline bool is_nothrow_implicitly_convertible_v = []{
+CONCEPT_T is_nothrow_implicitly_convertible_impl_v = noexcept( lambda_for_implicit_conversion<To>(declval<From>()) );
+template <class From, class To> CONCEPT_T is_nothrow_implicitly_convertible_v = []{
     if constexpr(is_implicitly_convertible_v<From, To>)
         return is_nothrow_implicitly_convertible_impl_v<From, To>;
     else

@@ -1,15 +1,14 @@
 #include "../enable_if.hpp"
 
-#ifndef VAR
-# define VAR constexpr const static inline bool
-#endif
+#include "../def_convenient_macros.hpp"
+
 
 #ifndef TP1
 # define TP1 template <class T>
 #endif
 
 #ifndef DEF_CONCEPT1
-# define DEF_CONCEPT1 TP1 VAR
+# define DEF_CONCEPT1 TP1 CONCEPT_T
 #endif
 
 #ifndef DEF_CHECK1

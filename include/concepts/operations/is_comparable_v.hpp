@@ -14,8 +14,8 @@ DEF_BIN_IMP_CONVERT_CHECK(GreaterEqualCompare, >=, bool);
 
 namespace nxwheels {
 # define DEF_CHECK(NAME)                                                                                                                                           \
-template <class T1, class T2 = T1> constexpr const static inline bool is_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2> && impl::is_## NAME ##able_v<T2, T1>;\
-template <class T1, class T2 = T1> constexpr const static inline bool is_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2> && impl::is_nothrow_## NAME ##able_v<T2, T1>
+template <class T1, class T2 = T1> CONCEPT_T is_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2> && impl::is_## NAME ##able_v<T2, T1>;\
+template <class T1, class T2 = T1> CONCEPT_T is_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2> && impl::is_nothrow_## NAME ##able_v<T2, T1>
 
 DEF_CHECK(EqualityCompare);
 DEF_CHECK(InEqualityCompare);

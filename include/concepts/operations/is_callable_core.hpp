@@ -7,14 +7,13 @@
 
 namespace nxwheels {
 # define DEF_TMP template <class T, class ...Args>
-# define VAR constexpr const static inline bool
 
 DEF_TMP using called_ret_t = decltype( (declval<T>())(decl_as<Args>()...) );
 DEF_TMP using is_callable = is_detected<called_ret_t, T, Args...>;
 
-DEF_TMP VAR is_callable_v = is_detected_v<called_ret_t, T, Args...>;
-DEF_TMP VAR is_nothrow_callable_impl_v = noexcept( (declval<T>())(decl_as<Args>()...) );
-DEF_TMP VAR is_nothrow_callable_v = []{
+DEF_TMP CONCEPT_T is_callable_v = is_detected_v<called_ret_t, T, Args...>;
+DEF_TMP CONCEPT_T is_nothrow_callable_impl_v = noexcept( (declval<T>())(decl_as<Args>()...) );
+DEF_TMP CONCEPT_T is_nothrow_callable_v = []{
     if constexpr(is_callable_v<T, Args...>)
         return is_nothrow_callable_impl_v<T, Args...>;
     else
