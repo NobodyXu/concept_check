@@ -1,3 +1,5 @@
+#include "../../undef_convenient_macros.hpp"
+
 #ifdef DEF_UN_CHECK
 # undef DEF_UN_CHECK
 #endif

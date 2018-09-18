@@ -4,6 +4,8 @@
 # include "../bool_constant.hpp"
 # include "../function_traits.hpp"
 
+# include "def_convenient_macros.hpp"
+
 namespace nxwheels {
 template <class T>          struct is_member_pointer:         false_type {};
 template <class P, class T> struct is_member_pointer<P T::*>: true_type {
@@ -11,21 +13,24 @@ template <class P, class T> struct is_member_pointer<P T::*>: true_type {
     using class_belonged_to_t = T;
 };
 
-template <class T> constexpr const static inline bool is_member_pointer_v = is_member_pointer<T>::value;
-template <class T> using pointed_to_by_member_pointer_t     = typename is_member_pointer<T>::pointed_t;
-template <class T> using class_member_pointer_belonged_to_t = typename is_member_pointer<T>::class_belonged_to_t;
+TP1 CONCEPT_T is_member_pointer_v = is_member_pointer<T>::value;
+TP1 using pointed_to_by_member_pointer_t     = typename is_member_pointer<T>::pointed_t;
+TP1 using class_member_pointer_belonged_to_t = typename is_member_pointer<T>::class_belonged_to_t;
 
-template <class T> constexpr const static inline bool is_member_function_pointer_v = [] {
+DEF_CONCEPT1 is_member_function_pointer_v = [] {
     if constexpr(is_member_pointer_v<T>)
         return is_function_v<pointed_to_by_member_pointer_t<T>>;
     else
         return false;
 }();
-template <class T> constexpr const static inline bool is_member_object_pointer_v = [] {
+DEF_CONCEPT1 is_member_object_pointer_v = [] {
     if constexpr(is_member_pointer_v<T>)
         return !is_function_v<pointed_to_by_member_pointer_t<T>>;
     else
         return false;
 }();
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif

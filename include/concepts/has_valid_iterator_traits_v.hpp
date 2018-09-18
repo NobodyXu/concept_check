@@ -10,10 +10,12 @@
 # include "is_nullable_pointer_v.hpp"
 # include "is_arithmetic_v.hpp"
 
+# include "def_convenient_macros.hpp"
+
 namespace nxwheels {
 # define TRAITS(MEMBER_NAME) typename std::iterator_traits<T>:: MEMBER_NAME
-template <class T>
-constexpr const static inline bool has_valid_iterator_traits_v = []{
+
+DEF_CONCEPT1 has_valid_iterator_traits_v = []{
     if constexpr(has_member_value_type_v<std::iterator_traits<T>>)
         return !std::is_void              <TRAITS(value_type)>{}()                &&
                is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)> &&
@@ -23,6 +25,9 @@ constexpr const static inline bool has_valid_iterator_traits_v = []{
     else
         return false;
 }();
+
 # undef TRAITS
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
 #endif

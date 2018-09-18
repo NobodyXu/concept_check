@@ -1,20 +1,22 @@
 #ifndef __nobodyxu_concept_check_function_traits_HPP__
 # define __nobodyxu_concept_check_function_traits_HPP__
 
+# include "def_convenient_macros.hpp"
+
 namespace nxwheels {
 template <class ...Args> struct Argslist {};
 
 template <class T>
 struct function_traits {
-    constexpr const static inline bool is_function_v = false;
+    CONCEPT_T is_function_v = false;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = false;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = false;
 
-    constexpr const static inline bool is_noexcept_qualified_v = false;
+    CONCEPT_T is_noexcept_qualified_v = false;
 };
 
 # define DEF_ARG_OP()\
@@ -25,15 +27,15 @@ struct function_traits {
 // The basic scenrio.
 template <class R, class ...Args, bool is_noexcept>
 struct function_traits<R (Args...) noexcept(is_noexcept)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = false;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = false;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -44,15 +46,15 @@ struct function_traits<R (Args...) noexcept(is_noexcept)> {
 // const volatile & &&
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -60,15 +62,15 @@ struct function_traits<R (Args...) const noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const & noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = true;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -76,15 +78,15 @@ struct function_traits<R (Args...) const & noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const && noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = true;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -93,15 +95,15 @@ struct function_traits<R (Args...) const && noexcept(is_noexcept_v)> {
 
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) volatile noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -109,15 +111,15 @@ struct function_traits<R (Args...) volatile noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) volatile & noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = true;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -125,15 +127,15 @@ struct function_traits<R (Args...) volatile & noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) volatile && noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = true;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -142,15 +144,15 @@ struct function_traits<R (Args...) volatile && noexcept(is_noexcept_v)> {
 
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) & noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = true;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -158,15 +160,15 @@ struct function_traits<R (Args...) & noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) && noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = false;
-    constexpr const static inline bool is_volatile_qualified_v = false;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = false;
+    CONCEPT_T is_volatile_qualified_v = false;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = true;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -175,15 +177,15 @@ struct function_traits<R (Args...) && noexcept(is_noexcept_v)> {
 
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const volatile noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -191,15 +193,15 @@ struct function_traits<R (Args...) const volatile noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const volatile & noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = true;
+    CONCEPT_T is_rvalue_reference_qualified_v = false;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -207,15 +209,15 @@ struct function_traits<R (Args...) const volatile & noexcept(is_noexcept_v)> {
 };
 template <class R, class ...Args, bool is_noexcept_v>
 struct function_traits<R (Args...) const volatile && noexcept(is_noexcept_v)> {
-    constexpr const static inline bool is_function_v = true;
+    CONCEPT_T is_function_v = true;
 
-    constexpr const static inline bool is_const_qualified_v = true;
-    constexpr const static inline bool is_volatile_qualified_v = true;
-    constexpr const static inline bool is_lvalue_reference_qualified_v = false;
-    constexpr const static inline bool is_rvalue_reference_qualified_v = true;
-    constexpr const static inline bool is_cvref_qualified_v = true;
+    CONCEPT_T is_const_qualified_v = true;
+    CONCEPT_T is_volatile_qualified_v = true;
+    CONCEPT_T is_lvalue_reference_qualified_v = false;
+    CONCEPT_T is_rvalue_reference_qualified_v = true;
+    CONCEPT_T is_cvref_qualified_v = true;
 
-    constexpr const static inline bool is_noexcept_qualified_v = is_noexcept_v;
+    CONCEPT_T is_noexcept_qualified_v = is_noexcept_v;
 
     DEF_ARG_OP();
     using ret_t = R;
@@ -233,4 +235,7 @@ template <class T, template <class...> class Op> using apply_function_args_to_t 
 
 template <class T> using ret_t_of_function = typename function_traits<T>::ret_t;
 } /* nxwheels */
+
+# include "undef_convenient_macros.hpp"
+
 #endif

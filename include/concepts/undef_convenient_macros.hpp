@@ -1,6 +1,4 @@
-#ifdef VAR
-# undef VAR
-#endif
+#include "../undef_convenient_macros.hpp"
 
 #ifdef TP1
 # undef TP1

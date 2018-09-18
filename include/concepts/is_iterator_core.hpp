@@ -27,31 +27,30 @@ DEF_CONCEPT1 is_InputIterator_core_v         = is_Iterator_core_v<T> &&
 DEF_CONCEPT1 is_ForwardIterator_core_v       = is_InputIterator_core_v<T>  && is_default_constructible_v<T>;
 DEF_CONCEPT1 is_BidirectionalIterator_core_v = is_ForwardIterator_core_v<T> && is_self_decrementable_v<T&>;
 
-template <class T>
-VAR is_RandomAccessIterator_core_impl_comp_req_v = is_GreaterEqualCompareable_v<T>                            &&
-                                                   is_GreaterThanCompareable_v<T>                             &&
-                                                   is_LessEqualCompareable_v<T>                               &&
-                                                   is_LessThanCompareable_v<T>;
+DEF_CONCEPT1 is_RandomAccessIterator_core_impl_comp_req_v = is_GreaterEqualCompareable_v<T>                            &&
+                                                            is_GreaterThanCompareable_v<T>                             &&
+                                                            is_LessEqualCompareable_v<T>                               &&
+                                                            is_LessThanCompareable_v<T>;
 template <class T, class diff_t, class ref>
-VAR is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requirement */
-                                          /* arithmetic assignment op */
-                                          is_addition_assignmentable_v<T&, diff_t>                    &&
-                                          is_subtraction_assignmentable_v<T&, diff_t>                 &&
-                                          /* nonassignment op */
-                                          is_additionable_v<T, diff_t>                               &&
-                                          is_implicitly_convertible_v<additioned_ret_t<diff_t, T>, T> &&
-                                          is_subtractionable_v<T, diff_t>                            &&
-                                          is_implicitly_convertible_v<subtractioned_ret_t<T, T>, diff_t> &&
-                                          /* access requirement */
-                                          is_subscriptable_v<T, diff_t>                              &&
-                                          /* convertion requirement */
-                                          is_implicitly_convertible_v<subscripted_t<T, diff_t>, ref>;
+CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requirement */
+                                                          /* arithmetic assignment op */
+                                                          is_addition_assignmentable_v<T&, diff_t>                    &&
+                                                          is_subtraction_assignmentable_v<T&, diff_t>                 &&
+                                                          /* nonassignment op */
+                                                          is_additionable_v<T, diff_t>                               &&
+                                                          is_implicitly_convertible_v<additioned_ret_t<diff_t, T>, T> &&
+                                                          is_subtractionable_v<T, diff_t>                            &&
+                                                          is_implicitly_convertible_v<subtractioned_ret_t<T, T>, diff_t> &&
+                                                          /* access requirement */
+                                                          is_subscriptable_v<T, diff_t>                              &&
+                                                          /* convertion requirement */
+                                                          is_implicitly_convertible_v<subscripted_t<T, diff_t>, ref>;
 
 # define TRAITS(NAME) typename std::iterator_traits<T>:: NAME
 template <class T, class diff_t = TRAITS(difference_type), class ref = TRAITS(reference)>
-VAR is_RandomAccessIterator_core_v = is_BidirectionalIterator_core_v<T>              &&
-                                     is_RandomAccessIterator_core_impl_comp_req_v<T> &&
-                                     is_RandomAccessIterator_core_impl_other_req_v<T, diff_t, ref>;
+CONCEPT_T is_RandomAccessIterator_core_v = is_BidirectionalIterator_core_v<T>              &&
+                                           is_RandomAccessIterator_core_impl_comp_req_v<T> &&
+                                           is_RandomAccessIterator_core_impl_other_req_v<T, diff_t, ref>;
 # undef TRAITS
 } /* nxwheels */
 
