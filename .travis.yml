@@ -1,4 +1,10 @@
 language: cpp
+
+cache:
+  directories:
+    - /var/cache/apt/archives
+    - /var/lib/apt/lists
+
 addons:
   apt:
     sources:
