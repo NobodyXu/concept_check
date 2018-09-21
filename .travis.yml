@@ -20,10 +20,9 @@ addons:
       #- clang++-5.0
       #- python3.5
 
-# Install the dependencies if it is not cached
+# Download the dependencies if it is not cached
+# All the "echo" and "ls" in "before_script" can be remove since they are only used for debugging.
 before_script:
-  - echo "Check whether the cache dir is made"
-  - ls ~
   - echo "Print content of deb_pack_cache"
   - ls ~/deb_pack_cache
   - echo "Check whether apt-get has no cache"
