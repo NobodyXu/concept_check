@@ -42,7 +42,7 @@ before_script:
   - # Update the cache
   - cp /var/cache/apt/archives/*deb ~/deb_pack_cache/
   -
-  - echo "Check that the cache is updated"
+  - echo "Check that the deb_pack_cache is updated"
   - ls ~/deb_pack_cache
 
 script:
