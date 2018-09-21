@@ -41,8 +41,8 @@ before_script:
         ls /var/cache/apt/archives
     fi
   -
+  - echo "Start to install software"
   - sudo apt-get update
-  - # Download the dependencies
   - sudo apt-get install -y --no-install-recommends --no-install-suggests gcc-6 g++-6 libstdc++6 clang-5.0 clang++-5.0 python3.5
   -
   - echo "Start updating the cache"
