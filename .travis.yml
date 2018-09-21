@@ -1,19 +1,47 @@
 language: cpp
+
+sudo: required
+
+cache:
+  - directories:
+    - ~/deb_pack_cache
+
 addons:
   apt:
     sources:
       - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main'
         key_url: https://apt.llvm.org/llvm-snapshot.gpg.key
       - ubuntu-toolchain-r-test
-    packages:
-      - gcc-6
-      - g++-6
-      - libstdc++6
-      - clang-5.0
-      - clang++-5.0
-      - python3.5
+    #packages:
+      #- gcc-6
+      #- g++-6
+      #- libstdc++6
+      #- clang-5.0
+      #- clang++-5.0
+      #- python3.5
 
-sudo: required
+# Install the dependencies if it is not cached
+before_script:
+  - # Check whether apt-get has no cache
+  - ls /var/cache/apt/archives
+  -
+  - # Set up cache for deb packages if the cache does not exist.
+  - |
+    if [ ! -e ~/deb_pack_cache ]
+    then
+        mkdir ~/deb_pack_cache
+    else
+        sudo mv ~/deb_pack_cache/*.deb /var/cache/apt/archives/
+    fi
+  -
+  - ls /var/cache/apt/archives
+  - sudo apt-get update
+  - # Download the dependencies
+  - sudo apt-get install -y --no-install-recommends --no-install-suggests gcc-6 g++-6 libstdc++6 clang-5.0 clang++-5.0 python3.5
+  -
+  - # Update the cache
+  - cp /var/cache/apt/archives/*deb ~/deb_pack_cache/
+
 script:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
