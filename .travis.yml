@@ -33,7 +33,7 @@ before_script:
         [ -e "$1" ]
     }
   - |
-    if [ -e "~/deb_pack_cache/*.deb" ]
+    if exist "~/deb_pack_cache/*.deb"
     then
         sudo mv ~/deb_pack_cache/*.deb /var/cache/apt/archives/
     fi
