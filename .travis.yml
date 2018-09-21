@@ -25,13 +25,11 @@ before_script:
   - # Check whether apt-get has no cache
   - ls /var/cache/apt/archives
   -
-  - # Set up cache for deb packages if the cache does not exist.
   - |
     if [ ! -e ~/deb_pack_cache ]
     then
         mkdir ~/deb_pack_cache
-    elif [ -e ~/deb_pack_cache/*.deb ]
-    then
+    else
         sudo mv ~/deb_pack_cache/*.deb /var/cache/apt/archives/
     fi
   -
