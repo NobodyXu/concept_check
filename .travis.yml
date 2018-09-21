@@ -41,6 +41,9 @@ before_script:
   -
   - # Update the cache
   - cp /var/cache/apt/archives/*deb ~/deb_pack_cache/
+  -
+  - echo "Check that the cache is updated"
+  - ls ~/deb_pack_cache
 
 script:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
