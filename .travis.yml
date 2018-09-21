@@ -30,7 +30,8 @@ before_script:
     if [ ! -e ~/deb_pack_cache ]
     then
         mkdir ~/deb_pack_cache
-    else if [ -e ~/deb_pack_cache/*.deb ]
+    elif [ -e ~/deb_pack_cache/*.deb ]
+    then
         sudo mv ~/deb_pack_cache/*.deb /var/cache/apt/archives/
     fi
   -
