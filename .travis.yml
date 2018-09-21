@@ -22,7 +22,9 @@ addons:
 
 # Install the dependencies if it is not cached
 before_script:
-  - # Check whether apt-get has no cache
+  - echo "Check whether the cache dir is made"
+  - ls ~
+  - echo "Check whether apt-get has no cache"
   - ls /var/cache/apt/archives
   -
   - # Set up cache for deb packages if the cache does not exist.
