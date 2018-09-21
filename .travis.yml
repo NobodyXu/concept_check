@@ -24,6 +24,8 @@ addons:
 before_script:
   - echo "Check whether the cache dir is made"
   - ls ~
+  - echo "Print content of deb_pack_cache"
+  - ls ~/deb_pack_cache
   - echo "Check whether apt-get has no cache"
   - ls /var/cache/apt/archives
   -
