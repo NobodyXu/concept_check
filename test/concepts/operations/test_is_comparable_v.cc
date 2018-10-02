@@ -44,7 +44,7 @@ int main() {
     // Test is_raw_EqualityComparable_v.
     {
         static_assert(!is_raw_EqualityCompareable_v<const S4&, const S3&>);
-        
+
         static_assert(is_raw_EqualityCompareable_v<const S3&, const S4&>);
     }
 }
