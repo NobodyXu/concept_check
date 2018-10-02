@@ -3,30 +3,24 @@
 
 # include "def_convenient_macros.hpp"
 
-namespace nxwheels::impl {
-DEF_BIN_IMP_CONVERT_CHECK(EqualityCompare, ==, bool);
-DEF_BIN_IMP_CONVERT_CHECK(InEqualityCompare, !=, bool);
-DEF_BIN_IMP_CONVERT_CHECK(LessThanCompare, <, bool);
-DEF_BIN_IMP_CONVERT_CHECK(LessEqualCompare, <=, bool);
-DEF_BIN_IMP_CONVERT_CHECK(GreaterThanCompare, >, bool);
-DEF_BIN_IMP_CONVERT_CHECK(GreaterEqualCompare, >=, bool);
-} /* nxwheels::impl */
-
 namespace nxwheels {
-# define DEF_RAW_CHECK(NAME)                                                                         \
-template <class T1, class T2 = T1> CONCEPT_T is_raw_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2>;\
-template <class T1, class T2 = T1> CONCEPT_T is_raw_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2>
+DEF_BIN_IMP_CONVERT_CHECK(raw_EqualityCompare, ==, bool);
+DEF_BIN_IMP_CONVERT_CHECK(raw_InEqualityCompare, !=, bool);
+DEF_BIN_IMP_CONVERT_CHECK(raw_LessThanCompare, <, bool);
+DEF_BIN_IMP_CONVERT_CHECK(raw_LessEqualCompare, <=, bool);
+DEF_BIN_IMP_CONVERT_CHECK(raw_GreaterThanCompare, >, bool);
+DEF_BIN_IMP_CONVERT_CHECK(raw_GreaterEqualCompare, >=, bool);
 
-DEF_RAW_CHECK(EqualityCompare);
-DEF_RAW_CHECK(InEqualityCompare);
-DEF_RAW_CHECK(LessThanCompare);
-DEF_RAW_CHECK(LessEqualCompare);
-DEF_RAW_CHECK(GreaterThanCompare);
-DEF_RAW_CHECK(GreaterEqualCompare);
+DEF_BIN_CHECK_T(raw_EqualityCompare);
+DEF_BIN_CHECK_T(raw_InEqualityCompare);
+DEF_BIN_CHECK_T(raw_LessThanCompare);
+DEF_BIN_CHECK_T(raw_LessEqualCompare);
+DEF_BIN_CHECK_T(raw_GreaterThanCompare);
+DEF_BIN_CHECK_T(raw_GreaterEqualCompare);
 
-# define DEF_CHECK(NAME)                                                                                                                                           \
-template <class T1, class T2 = T1> CONCEPT_T is_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2> && impl::is_## NAME ##able_v<T2, T1>;\
-template <class T1, class T2 = T1> CONCEPT_T is_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2> && impl::is_nothrow_## NAME ##able_v<T2, T1>
+# define DEF_CHECK(NAME)                                                                                                              \
+template <class T1, class T2 = T1> CONCEPT_T is_## NAME ##able_v = is_raw_## NAME ##able_v<T1, T2> && is_raw_## NAME ##able_v<T2, T1>;\
+template <class T1, class T2 = T1> CONCEPT_T is_nothrow_## NAME ##able_v = is_nothrow_raw_## NAME ##able_v<T1, T2> && is_nothrow_raw_## NAME ##able_v<T2, T1>
 
 DEF_CHECK(EqualityCompare);
 DEF_CHECK(InEqualityCompare);
