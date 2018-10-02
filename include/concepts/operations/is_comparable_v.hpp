@@ -13,6 +13,17 @@ DEF_BIN_IMP_CONVERT_CHECK(GreaterEqualCompare, >=, bool);
 } /* nxwheels::impl */
 
 namespace nxwheels {
+# define DEF_RAW_CHECK(NAME)                                                                         \
+template <class T1, class T2 = T1> CONCEPT_T is_raw_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2>;\
+template <class T1, class T2 = T1> CONCEPT_T is_raw_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2>
+
+DEF_RAW_CHECK(EqualityCompare);
+DEF_RAW_CHECK(InEqualityCompare);
+DEF_RAW_CHECK(LessThanCompare);
+DEF_RAW_CHECK(LessEqualCompare);
+DEF_RAW_CHECK(GreaterThanCompare);
+DEF_RAW_CHECK(GreaterEqualCompare);
+
 # define DEF_CHECK(NAME)                                                                                                                                           \
 template <class T1, class T2 = T1> CONCEPT_T is_## NAME ##able_v = impl::is_## NAME ##able_v<T1, T2> && impl::is_## NAME ##able_v<T2, T1>;\
 template <class T1, class T2 = T1> CONCEPT_T is_nothrow_## NAME ##able_v = impl::is_nothrow_## NAME ##able_v<T1, T2> && impl::is_nothrow_## NAME ##able_v<T2, T1>
