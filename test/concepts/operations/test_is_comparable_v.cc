@@ -13,6 +13,11 @@ struct S2 {
     bool operator != (const S2&) noexcept { return true; }
 };
 
+struct S3 {};
+struct S4 {};
+
+bool operator == (const S3&, const S4&) { return true; }
+
 int main() {
     // Test is_EqualityCompareable_v.
     {
@@ -36,4 +41,10 @@ int main() {
 
     }
 
+    // Test is_raw_EqualityComparable_v.
+    {
+        static_assert(!is_raw_EqualityCompareable_v<const S4&, const S3&>);
+        
+        static_assert(is_raw_EqualityCompareable_v<const S3&, const S4&>);
+    }
 }
