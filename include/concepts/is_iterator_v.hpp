@@ -4,12 +4,14 @@
 # include "is_iterator_core.hpp"
 # include "has_valid_iterator_traits_v.hpp"
 
+# include "member/has_member_type_value_type_v.hpp"
+
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
 # define TRAITS(NAME) typename std::iterator_traits<T>:: NAME
 
-DEF_CONCEPT1 is_Iterator_v = is_Iterator_core_v<T> && has_member_value_type_v<std::iterator_traits<T>> && is_dereferenceable_v<T>;
+DEF_CONCEPT1 is_Iterator_v = is_Iterator_core_v<T> && has_member_type_value_type_v<std::iterator_traits<T>> && is_dereferenceable_v<T>;
 
 DEF_CONCEPT1 is_const_Iterator_v = is_implicitly_convertible_v<TRAITS(reference), const TRAITS(value_type)&>;
 DEF_CONCEPT1 is_mutable_Iterator_v = is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)&>;
