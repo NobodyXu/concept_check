@@ -9,16 +9,7 @@
 
 namespace nxwheels {
 DEF_UN_IMP_CONVERT_CHECK(pre_increment, ++, add_lvalue_reference_t<T>);
-
-template <class T> using post_incremented_t = decltype( declval<T>()++ );
-template <class T> CONCEPT_T is_post_incrementable_v = is_detected_implicitly_convertible_v<std::remove_reference_t<T>, post_incremented_t, T>;
-template <class T> CONCEPT_T _is_nothrow_post_incrementable_v = noexcept( declval<T>()++ );
-template <class T> CONCEPT_T is_nothrow_post_incrementable_v = [] {
-    if constexpr(is_post_incrementable_v<T>)
-        return _is_nothrow_post_incrementable_v<T>;
-    else
-        return false;
-}();
+DEF_UN_IMP_CONVERT_CHECK(post_increment,  , std::remove_reference_t<T>, ++);
 
 template <class T> CONCEPT_T is_self_incrementable_v = is_pre_incrementable_v<T> && is_post_incrementable_v<T>;
 template <class T> CONCEPT_T is_nothrow_self_incrementable_v = is_nothrow_pre_incrementable_v<T> && is_nothrow_post_incrementable_v<T>;

@@ -43,7 +43,7 @@ CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requi
                                                           /* access requirement */
                                                           is_subscriptable_v<T, diff_t>                              &&
                                                           /* convertion requirement */
-                                                          is_implicitly_convertible_v<subscripted_t<T, diff_t>, ref>;
+                                                          is_implicitly_convertible_v<subscripted_ret_t<T, diff_t>, ref>;
 
 # define TRAITS(NAME) typename std::iterator_traits<T>:: NAME
 template <class T, class diff_t = TRAITS(difference_type), class ref = TRAITS(reference)>
