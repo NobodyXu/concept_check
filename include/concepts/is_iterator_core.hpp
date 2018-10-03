@@ -38,9 +38,8 @@ CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requi
                                                           is_subtraction_assignmentable_v<T&, diff_t>                 &&
                                                           /* nonassignment op */
                                                           is_additionable_v<T, diff_t>                               &&
-                                                          is_implicitly_convertible_v<additioned_ret_t<diff_t, T>, T> &&
-                                                          is_subtractionable_v<T, diff_t>                            &&
-                                                          is_implicitly_convertible_v<subtractioned_ret_t<T, T>, diff_t> &&
+                                                          is_raw_subtractionable_v<T, diff_t>                            &&
+                                                          is_raw_subtractionable_v<T, T, diff_t>                         &&
                                                           /* access requirement */
                                                           is_subscriptable_v<T, diff_t>                              &&
                                                           /* convertion requirement */
