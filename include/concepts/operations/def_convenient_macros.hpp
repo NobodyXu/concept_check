@@ -40,10 +40,10 @@ template <class T1, class T2> CONCEPT_T is_nothrow_## NAME ##able_v = []{       
 #ifndef DEF_UN_IMP_CONVERT_CHECK
 # define DEF_UN_IMP_CONVERT_CHECK(NAME, OP, RET_T)                                                                                 \
 template <class T> using NAME ##ed_ret_t = decltype( OP declval<T>() );                                             \
-template <class T> CONCEPT_T is_## NAME ##able_v = is_detected_implicitly_convertible_v<RET_T, NAME ##ed_ret_t, T>;      \
+template <class T, class Ret_t = RET_T> CONCEPT_T is_## NAME ##able_v = is_detected_implicitly_convertible_v<Ret_t, NAME ##ed_ret_t, T>;      \
 template <class T> CONCEPT_T is_nothrow_## NAME ##able_impl_v = noexcept( OP declval<T>() );\
-template <class T> CONCEPT_T is_nothrow_## NAME ##able_v = []{                              \
-    if constexpr(is_## NAME ##able_v<T>)                                                                             \
+template <class T, class Ret_t = RET_T> CONCEPT_T is_nothrow_## NAME ##able_v = []{                              \
+    if constexpr(is_## NAME ##able_v<T, Ret_t>)                                                                             \
         return is_nothrow_## NAME ##able_impl_v<T>;                                                                  \
     else                                                                                                             \
         return false;                                                                                                \
@@ -52,11 +52,11 @@ template <class T> CONCEPT_T is_nothrow_## NAME ##able_v = []{                  
 
 #ifndef DEF_BIN_IMP_CONVERT_CHECK
 # define DEF_BIN_IMP_CONVERT_CHECK(NAME, OP, RET_T)                                                                                                          \
-template <class T1, class T2> using NAME ##ed_ret_t = decltype( declval<T1>() OP declval<T2>() );                                             \
-template <class T1, class T2> CONCEPT_T is_## NAME ##able_v = is_detected_implicitly_convertible_v<RET_T, NAME ##ed_ret_t, T1, T2>;                \
-template <class T1, class T2> CONCEPT_T is_nothrow_## NAME ##able_impl_v = noexcept( declval<T1>() OP declval<T2>() );\
-template <class T1, class T2> CONCEPT_T is_nothrow_## NAME ##able_v = []{                                             \
-    if constexpr(is_## NAME ##able_v<T1, T2>)                                                                                                  \
+template <class T1, class T2 = T1> using NAME ##ed_ret_t = decltype( declval<T1>() OP declval<T2>() );                                             \
+template <class T1, class T2 = T1, class Ret_t = RET_T> CONCEPT_T is_## NAME ##able_v = is_detected_implicitly_convertible_v<Ret_t, NAME ##ed_ret_t, T1, T2>;                \
+template <class T1, class T2 = T1> CONCEPT_T is_nothrow_## NAME ##able_impl_v = noexcept( declval<T1>() OP declval<T2>() );\
+template <class T1, class T2 = T1, class Ret_t = RET_T> CONCEPT_T is_nothrow_## NAME ##able_v = []{                                             \
+    if constexpr(is_## NAME ##able_v<T1, T2, Ret_t>)                                                                                                  \
         return is_nothrow_## NAME ##able_impl_v<T1, T2>;                                                                                       \
     else                                                                                                                                       \
         return false;                                                                                                                          \
