@@ -2,10 +2,10 @@
 # define __nobodyxu_concept_check_detector_core_HPP__
 
 # include "bool_constant.hpp"
+# include "nonsuch.hpp"
 
 namespace nxwheels {
 template <class ...> using void_t = void;
-struct nonsuch {};
 } /* nxwheels */
 
 namespace nxwheels::impl {
