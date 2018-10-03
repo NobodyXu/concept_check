@@ -13,10 +13,19 @@ DEF_UN_CHECK_T(unary_plus);
 DEF_UN_CHECK_T(unary_minus);
 DEF_UN_CHECK_T(bitwise_not);
 
-#  define DEF_TP2(NAME, OP)                                                       \
-DEF_BIN_IMP_CONVERT_CHECK(NAME, OP, T1);                                          \
-DEF_BIN_CHECK_T(NAME);                                                            \
-DEF_BIN_IMP_CONVERT_CHECK(NAME ## _assignment, OP##=, add_lvalue_reference_t<T1>);\
+#  define DEF_TP2(NAME, OP)                                                               \
+DEF_BIN_IMP_CONVERT_CHECK(raw_## NAME, OP, T1);                                           \
+DEF_BIN_CHECK_T(raw_## NAME);                                                             \
+                                                                                          \
+template <class T1, class T2 = T1, class Ret_t = T1>                                      \
+CONCEPT_T is_## NAME ##able_v = is_raw_## NAME ##able_v<T1, T2, Ret_t> &&                 \
+                                is_raw_## NAME ##able_v<T2, T1, Ret_t>;                   \
+template <class T1, class T2 = T1, class Ret_t = T1>                                      \
+CONCEPT_T is_nothrow_## NAME ##able_v = is_nothrow_raw_## NAME ##able_v<T1, T2, Ret_t> && \
+                                        is_nothrow_raw_## NAME ##able_v<T2, T1, Ret_t>;   \
+DEF_BIN_CHECK_T(NAME);                                                                    \
+                                                                                          \
+DEF_BIN_IMP_CONVERT_CHECK(NAME ## _assignment, OP##=, add_lvalue_reference_t<T1>);        \
 DEF_BIN_CHECK_T(NAME ##_assignment)
 
 DEF_TP2(addition, +);
