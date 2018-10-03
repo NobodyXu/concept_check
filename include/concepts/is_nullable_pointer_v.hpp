@@ -3,7 +3,6 @@
 
 # include <memory>
 
-# include "member/has_member_difference_type_v.hpp"
 # include "is_iterator_core.hpp"
 # include "def_convenient_macros.hpp"
 
