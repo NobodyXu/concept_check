@@ -9,7 +9,8 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-DEF_CONCEPT1 is_builtin_pointer_v = is_builtin_nonmember_pointer_v<T> || is_member_pointer_v<T>;
+template <class T>
+CONCEPT_T is_builtin_pointer_v = is_builtin_nonmember_pointer_v<T> || is_member_pointer_v<T>;
 
 template <class T>
 struct pointed_to_by_pointer {};

@@ -9,7 +9,9 @@
 namespace nxwheels {
 # define TRAITS(MEMBER_NAME) typename std::pointer_traits<T>:: MEMBER_NAME
 # define NULLP_T decltype(nullptr)
-DEF_CONCEPT1 is_nullable_pointer_v = []{
+
+template <class T>
+CONCEPT_T is_nullable_pointer_v = []{
     if constexpr(
         is_dereferenceable_v<T>                                                        &&
         /* ctor, assign requirement */
@@ -26,6 +28,7 @@ DEF_CONCEPT1 is_nullable_pointer_v = []{
     else
         return false;
 }();
+
 # undef NULLP_T
 # undef TRAITS
 

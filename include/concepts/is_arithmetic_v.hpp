@@ -18,7 +18,9 @@
 
 namespace nxwheels {
 # define CHECK_OP(NAME) is_nothrow_## NAME ##able_v<T, T> && is_nothrow_## NAME ##_assignmentable_v<T&, T&>
-DEF_CONCEPT1 is_arithmetic_v = /* type requirement */
+
+template <class T>
+CONCEPT_T is_arithmetic_v = /* type requirement */
                                std::is_trivial<T>{}() &&
                                /* ctor requirement */
                                is_nothrow_copy_constructible_v   <T> &&

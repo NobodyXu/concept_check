@@ -15,7 +15,8 @@
 namespace nxwheels {
 # define TRAITS(MEMBER_NAME) typename std::iterator_traits<T>:: MEMBER_NAME
 
-DEF_CONCEPT1 has_valid_iterator_traits_v = []{
+template <class T>
+CONCEPT_T has_valid_iterator_traits_v = []{
     if constexpr(has_member_type_value_type_v<std::iterator_traits<T>>)
         return !std::is_void              <TRAITS(value_type)>{}()                &&
                is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)> &&
