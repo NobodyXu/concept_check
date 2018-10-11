@@ -21,7 +21,8 @@ CONCEPT_T is_nullable_pointer_v = []{
         is_EqualityCompareable_v<T, NULLP_T> && is_InEqualityCompareable_v<T, NULLP_T> &&
         /* Part of Iterator requirement */
         is_RandomAccessIterator_core_impl_comp_req_v<T>                                &&
-        is_BidirectionalIterator_core_v<T>
+        is_BidirectionalIterator_core_v<T>                                             &&
+        is_implicitly_convertible_v<T, bool>
     )
         return is_RandomAccessIterator_core_impl_other_req_v<T, TRAITS(difference_type), TRAITS(element_type)&> &&
                is_implicitly_convertible_dereferenceable_v  <T, TRAITS(element_type)&>;
