@@ -12,7 +12,7 @@
 # include "operations/is_convertible_v.hpp"
 # include "operations/is_self_decrementable_v.hpp"
 # include "operations/is_self_incrementable_v.hpp"
-# include "operations/is_Swappable_v.hpp"
+# include "operations/is_swappable_v.hpp"
 
 # include "def_convenient_macros.hpp"
 
@@ -37,6 +37,9 @@ CONCEPT_T is_arithmetic_v = /* type requirement */
                                is_nothrow_unary_plusable_v<T> &&
                                is_nothrow_unary_minusable_v<T> &&
                                is_nothrow_bitwise_notable_v<T> &&
+                               /* self inc/dec */
+                               is_self_incrementable_v<T&> &&
+                               is_self_decrementable_v<T&>
                                /* Binary ops */
                                CHECK_OP(addition) &&
                                CHECK_OP(subtraction) &&
@@ -47,10 +50,7 @@ CONCEPT_T is_arithmetic_v = /* type requirement */
                                CHECK_OP(bitwise_or) &&
                                CHECK_OP(bitwise_xor) &&
                                CHECK_OP(bitwise_left_shift) &&
-                               CHECK_OP(bitwise_right_shift) &&
-                               /* self inc/dec */
-                               is_self_incrementable_v<T&> &&
-                               is_self_decrementable_v<T&>;
+                               CHECK_OP(bitwise_right_shift);
 # undef CHECK_OP
 
 DEF_CHECK1(arithmetic);
