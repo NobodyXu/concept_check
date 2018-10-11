@@ -5,11 +5,14 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-TP1 using lvalue_ref_t = T&;
+template <class T>
+using lvalue_ref_t = T&;
+
 /*!
  * is_referenceable_v tests whether T& is valid.
  */
-TP1 CONCEPT_T is_referenceable_v = is_detected_v<lvalue_ref_t, T>;
+template <class T>
+CONCEPT_T is_referenceable_v = is_detected_v<lvalue_ref_t, T>;
 } /* nxwheels */
 
 # include "undef_convenient_macros.hpp"

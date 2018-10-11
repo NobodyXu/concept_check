@@ -16,21 +16,26 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-DEF_CONCEPT1 is_Iterator_core_v = is_copy_constructible_v<T>     &&
-                                  std::is_copy_assignable<T>{}() &&
-                                  std::is_destructible<T>{}()    &&
-                                  is_swappable_v<T&>             &&
-                                  is_self_incrementable_v<T&>;
+template <class T>
+CONCEPT_T is_Iterator_core_v = is_copy_constructible_v<T>     &&
+                               std::is_copy_assignable<T>{}() &&
+                               std::is_destructible<T>{}()    &&
+                               is_swappable_v<T&>             &&
+                               is_self_incrementable_v<T&>;
 
-DEF_CONCEPT1 is_InputIterator_core_v         = is_Iterator_core_v<T> &&
-                                               is_EqualityCompareable_v<T> && is_InEqualityCompareable_v<T>;
-DEF_CONCEPT1 is_ForwardIterator_core_v       = is_InputIterator_core_v<T>  && is_default_constructible_v<T>;
-DEF_CONCEPT1 is_BidirectionalIterator_core_v = is_ForwardIterator_core_v<T> && is_self_decrementable_v<T&>;
+template <class T>
+CONCEPT_T is_InputIterator_core_v         = is_Iterator_core_v<T> &&
+                                            is_EqualityCompareable_v<T> && is_InEqualityCompareable_v<T>;
+template <class T>
+CONCEPT_T is_ForwardIterator_core_v       = is_InputIterator_core_v<T>  && is_default_constructible_v<T>;
+template <class T>
+CONCEPT_T is_BidirectionalIterator_core_v = is_ForwardIterator_core_v<T> && is_self_decrementable_v<T&>;
 
-DEF_CONCEPT1 is_RandomAccessIterator_core_impl_comp_req_v = is_GreaterEqualCompareable_v<T>                            &&
-                                                            is_GreaterThanCompareable_v<T>                             &&
-                                                            is_LessEqualCompareable_v<T>                               &&
-                                                            is_LessThanCompareable_v<T>;
+template <class T>
+CONCEPT_T is_RandomAccessIterator_core_impl_comp_req_v = is_GreaterEqualCompareable_v<T>                            &&
+                                                         is_GreaterThanCompareable_v<T>                             &&
+                                                         is_LessEqualCompareable_v<T>                               &&
+                                                         is_LessThanCompareable_v<T>;
 template <class T, class diff_t, class ref>
 CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requirement */
                                                           /* arithmetic assignment op */
@@ -46,10 +51,12 @@ CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requi
                                                           is_implicitly_convertible_v<subscripted_ret_t<T, diff_t>, ref>;
 
 # define TRAITS(NAME) typename std::iterator_traits<T>:: NAME
+
 template <class T, class diff_t = TRAITS(difference_type), class ref = TRAITS(reference)>
 CONCEPT_T is_RandomAccessIterator_core_v = is_BidirectionalIterator_core_v<T>              &&
                                            is_RandomAccessIterator_core_impl_comp_req_v<T> &&
                                            is_RandomAccessIterator_core_impl_other_req_v<T, diff_t, ref>;
+
 # undef TRAITS
 } /* nxwheels */
 
