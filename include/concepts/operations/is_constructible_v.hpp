@@ -10,68 +10,85 @@
 # include "def_convenient_macros.hpp"
 
 namespace nxwheels {
-# define DEF_TMP template <class T, class ...Args>
-
-DEF_TMP using direct_construct_t          = decltype( new T(declval<Args>()...) );
-DEF_TMP using list_construct_t            = decltype( new T{declval<Args>()...} );
+template <class T, class ...Args>
+using direct_construct_t          = decltype( new T(declval<Args>()...) );
+template <class T, class ...Args>
+using list_construct_t            = decltype( new T{declval<Args>()...} );
 /*!
  * This is just a naive emulation of initializer_list initialization.
  * You need to manually filter out the situation when default construct, cp/mv is actually expected.
  */
-DEF_TMP using initialier_list_construct_t = decltype( new T({declval<Args>()...}) );
+template <class T, class ...Args>
+using initialier_list_construct_t = decltype( new T({declval<Args>()...}) );
 
-DEF_TMP CONCEPT_T is_direct_constructible_v = is_detected_v<direct_construct_t, T, Args...>;
-DEF_TMP CONCEPT_T is_nothrow_direct_constructible_impl_v = noexcept( new (nullptr) T(declval<Args>()...) );
-DEF_TMP CONCEPT_T is_nothrow_direct_constructible_v = [] {
+template <class T, class ...Args>
+CONCEPT_T is_direct_constructible_v = is_detected_v<direct_construct_t, T, Args...>;
+
+template <class T, class ...Args>
+CONCEPT_T is_nothrow_direct_constructible_impl_v = noexcept( new (nullptr) T(declval<Args>()...) );
+template <class T, class ...Args>
+CONCEPT_T is_nothrow_direct_constructible_v = [] {
     if constexpr(is_direct_constructible_v<T, Args...>)
         return is_nothrow_direct_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
 
-DEF_TMP CONCEPT_T is_list_constructible_v = is_detected_v<list_construct_t, T, Args...>;
-DEF_TMP CONCEPT_T is_nothrow_list_constructible_impl_v = noexcept( new (nullptr) T{declval<Args>()...} );
-DEF_TMP CONCEPT_T is_nothrow_list_constructible_v = [] {
+template <class T, class ...Args>
+CONCEPT_T is_list_constructible_v = is_detected_v<list_construct_t, T, Args...>;
+
+template <class T, class ...Args>
+CONCEPT_T is_nothrow_list_constructible_impl_v = noexcept( new (nullptr) T{declval<Args>()...} );
+template <class T, class ...Args>
+CONCEPT_T is_nothrow_list_constructible_v = [] {
     if constexpr(is_list_constructible_v<T, Args...>)
         return is_nothrow_list_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
 
-DEF_TMP            struct is_initializer_list_constructible             : bool_constant<is_detected_v<initialier_list_construct_t, T, Args...>> {};
+template <class T, class ...Args>
+struct is_initializer_list_constructible: bool_constant<is_detected_v<initialier_list_construct_t, T, Args...>> {};
+
 template <class T> struct is_initializer_list_constructible<T>          : false_type {};
 template <class T> struct is_initializer_list_constructible<T, const T&>: false_type {};
 template <class T> struct is_initializer_list_constructible<T, T&&>     : false_type {};
 template <class T> struct is_initializer_list_constructible<T, T>       : false_type {};
 template <class T> struct is_initializer_list_constructible<T, T&>      : false_type {};
-DEF_TMP CONCEPT_T is_initializer_list_constructible_v = is_initializer_list_constructible<T, Args...>::value;
+
+template <class T, class ...Args>
+CONCEPT_T is_initializer_list_constructible_v = is_initializer_list_constructible<T, Args...>::value;
 
 // There is no separate is_nothrow_initializer_list_constructible_impl_v due to the fact that you can use is_nothrow_list_constructible_impl_v.
-DEF_TMP CONCEPT_T is_nothrow_initializer_list_constructible_v = []{
+template <class T, class ...Args>
+CONCEPT_T is_nothrow_initializer_list_constructible_v = []{
     if constexpr(is_initializer_list_constructible_v<T, Args...>)
         return is_nothrow_list_constructible_impl_v<T, Args...>;
     else
         return false;
 }();
 
-// Check DEF_TMP from T + variable args to T.
-# undef DEF_TMP
-# define DEF_TMP template <class T>
-
 // Define of shortcut of often used concepts.
-DEF_TMP CONCEPT_T is_default_constructible_v              = is_direct_constructible_v<T>;
-DEF_TMP CONCEPT_T is_nothrow_default_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T>;
-DEF_TMP CONCEPT_T is_nothrow_default_constructible_v      = is_nothrow_direct_constructible_v<T>;
+template <class T>
+CONCEPT_T is_default_constructible_v              = is_direct_constructible_v<T>;
+template <class T>
+CONCEPT_T is_nothrow_default_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T>;
+template <class T>
+CONCEPT_T is_nothrow_default_constructible_v      = is_nothrow_direct_constructible_v<T>;
 
-DEF_TMP CONCEPT_T is_copy_constructible_v              = is_direct_constructible_v<T, const T&>;
-DEF_TMP CONCEPT_T is_nothrow_copy_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, const T&>;
-DEF_TMP CONCEPT_T is_nothrow_copy_constructible_v      = is_nothrow_direct_constructible_v<T, const T&>;
+template <class T>
+CONCEPT_T is_copy_constructible_v              = is_direct_constructible_v<T, const T&>;
+template <class T>
+CONCEPT_T is_nothrow_copy_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, const T&>;
+template <class T>
+CONCEPT_T is_nothrow_copy_constructible_v      = is_nothrow_direct_constructible_v<T, const T&>;
 
-DEF_TMP CONCEPT_T is_move_constructible_v              = is_direct_constructible_v<T, T&&>;
-DEF_TMP CONCEPT_T is_nothrow_move_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, T&&>;
-DEF_TMP CONCEPT_T is_nothrow_move_constructible_v      = is_nothrow_direct_constructible_v<T, T&&>;
-
-# undef DEF_TMP
+template <class T>
+CONCEPT_T is_move_constructible_v              = is_direct_constructible_v<T, T&&>;
+template <class T>
+CONCEPT_T is_nothrow_move_constructible_impl_v = is_nothrow_direct_constructible_impl_v<T, T&&>;
+template <class T>
+CONCEPT_T is_nothrow_move_constructible_v      = is_nothrow_direct_constructible_v<T, T&&>;
 
 # define _DEF_CLASS_WRAPPER(NAME) template <class T, class ...Args> struct is_## NAME : bool_constant<is_## NAME ##_v<T, Args...>> {}
 # define DEF_CLASS_WRAPPER(NAME) _DEF_CLASS_WRAPPER(NAME); _DEF_CLASS_WRAPPER(nothrow_## NAME)
