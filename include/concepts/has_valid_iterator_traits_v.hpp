@@ -19,9 +19,13 @@ namespace nxwheels {
 template <class T>
 CONCEPT_T has_valid_iterator_traits_v = []{
     if constexpr(has_member_type_value_type_v<std::iterator_traits<T>>) {
+        using value_type = TRAITS(value_type);
+        using pointer = TRAITS(pointer);
+        
         if constexpr(!is_same_v<TRAITS(value_type), void>)
-               return is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)> &&
-                      is_nullable_pointer_v      <TRAITS(pointer)>                       &&
+               return is_implicitly_convertible_v<TRAITS(reference), value_type> &&
+                      is_nullable_pointer_v      <pointer>                       &&
+                      is_implicitly_convertible_dereferenceable_v<pointer, value_type> &&
                       is_arithmetic_v            <TRAITS(difference_type)>               &&
                       std::is_base_of            <std::input_iterator_tag, TRAITS(iterator_category)>{}();
         else
