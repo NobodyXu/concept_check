@@ -46,9 +46,12 @@ CONCEPT_T is_RandomAccessIterator_core_impl_other_req_v = /* arithmetic op requi
                                                           is_raw_subtractionable_v<T, diff_t>                            &&
                                                           is_raw_subtractionable_v<T, T, diff_t>                         &&
                                                           /* access requirement */
-                                                          is_subscriptable_v<T, diff_t>                              &&
-                                                          /* convertion requirement */
-                                                          is_implicitly_convertible_v<subscripted_ret_t<T, diff_t>, ref>;
+                                                          []{
+                                                              if constexpr(is_subscriptable_v<T, diff_t>)
+                                                                  return is_implicitly_convertible_v<subscripted_ret_t<T, diff_t>, ref>;
+                                                              else
+                                                                  return false;
+                                                          }();
 
 # define TRAITS(NAME) typename std::iterator_traits<T>:: NAME
 
