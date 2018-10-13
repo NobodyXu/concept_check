@@ -22,17 +22,40 @@ template <class T>
 CONCEPT_T is_mutable_Iterator_v = is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)&>;
 
 template <class T>
-CONCEPT_T is_InputIterator_impl_v = has_valid_iterator_traits_v<T> && is_exact_dereferenceable_v<T, TRAITS(reference)>;
+CONCEPT_T is_InputIterator_impl_v = []{
+    if constexpr(has_valid_iterator_traits_v<T>)
+        return is_exact_dereferenceable_v<T, TRAITS(reference)>;
+    else
+        return false;
+}();
+
 template <class T>
 CONCEPT_T is_InputIterator_v = is_InputIterator_core_v<T> && is_InputIterator_impl_v<T>;
 
-# define WRAPPER(NAME, TAG)                                                                                                                                                    \
-template <class T>                                                                                                                                                             \
-CONCEPT_T is_## NAME ##Iterator_v = is_## NAME ##Iterator_core_v<T> && is_InputIterator_impl_v<T> && std::is_base_of<std:: TAG ##_iterator_tag, TRAITS(iterator_category)>{}();\
-template <class T>                                                                                                                                                             \
-CONCEPT_T is_const_## NAME ##Iterator_v = is_## NAME ##Iterator_v<T> && is_const_Iterator_v<T>;                                                                                \
-template <class T>                                                                                                                                                             \
-CONCEPT_T is_mutable_## NAME ##Iterator_v = is_## NAME ##Iterator_v<T> && is_mutable_Iterator_v<T>
+# define WRAPPER(NAME, TAG)                                                                 \
+template <class T>                                                                          \
+CONCEPT_T is_## NAME ##Iterator_v = []{                                                     \
+    if constexpr(is_InputIterator_impl_v<T>)                                                \
+        return is_## NAME ##Iterator_core_v<T> &&                                           \
+               std::is_base_of<std:: TAG ##_iterator_tag, TRAITS(iterator_category)>::value;\
+    else                                                                                    \
+        return false;                                                                       \
+}();                                                                                        \
+template <class T>                                                                          \
+CONCEPT_T is_const_## NAME ##Iterator_v = []{                                               \
+    if constexpr(is_## NAME ##Iterator_v<T>)                                                \
+        return is_const_Iterator_v<T>;                                                      \
+    else                                                                                    \
+        return false;                                                                       \
+}();                                                                                        \
+                                                                                            \
+template <class T>                                                                          \
+CONCEPT_T is_mutable_## NAME ##Iterator_v = []{                                             \
+    if constexpr(is_## NAME ##Iterator_v<T> )                                               \
+        return is_mutable_Iterator_v<T>;                                                    \
+    else                                                                                    \
+        return false;                                                                       \
+}()
 
 WRAPPER(Forward, forward);
 WRAPPER(Bidirectional, bidirectional);

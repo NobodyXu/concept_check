@@ -10,6 +10,7 @@ using namespace nxwheels;
 
 int main() {
     static_assert(!is_Iterator_v<int>);
+    static_assert(!is_RandomAccessIterator_v<int>);
 
     // Input Iterator
     static_assert(is_InputIterator_v<std::istream_iterator<int>>);
