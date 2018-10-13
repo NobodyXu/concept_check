@@ -9,6 +9,7 @@
 
 # include "is_nullable_pointer_v.hpp"
 # include "is_arithmetic_v.hpp"
+# include "is_same.hpp"
 
 # include "def_convenient_macros.hpp"
 
@@ -17,13 +18,15 @@ namespace nxwheels {
 
 template <class T>
 CONCEPT_T has_valid_iterator_traits_v = []{
-    if constexpr(has_member_type_value_type_v<std::iterator_traits<T>>)
-        return !std::is_void              <TRAITS(value_type)>{}()                &&
-               is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)> &&
-               is_nullable_pointer_v      <TRAITS(pointer)>                       &&
-               is_arithmetic_v            <TRAITS(difference_type)>               &&
-               std::is_base_of            <std::input_iterator_tag, TRAITS(iterator_category)>{}();
-    else
+    if constexpr(has_member_type_value_type_v<std::iterator_traits<T>>) {
+        if constexpr(!is_same_v<TRAITS(value_type), void>)
+               return is_implicitly_convertible_v<TRAITS(reference), TRAITS(value_type)> &&
+                      is_nullable_pointer_v      <TRAITS(pointer)>                       &&
+                      is_arithmetic_v            <TRAITS(difference_type)>               &&
+                      std::is_base_of            <std::input_iterator_tag, TRAITS(iterator_category)>{}();
+        else
+            return false;
+    } else
         return false;
 }();
 
