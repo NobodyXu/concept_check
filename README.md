@@ -24,7 +24,7 @@ auto func2(It &&) -> std::enable_if_t< is_Iterator_v<std::remove_reference_t<It>
 ## Goal of the library
 I created this library due to my hate for the ugly and disturbed syntex of ```The Boost Concept Check library```. It forces you to use ```BOOST_CONCEPT_REQUIRES``` which requires you to put your return type into it, or use ```BOOST_CONCEPT_ASSERT```. What's more, the way to extend it is quite strange to me -- you create another class in many lines to check it.
 
-This library is intended to be clear in syntex and reusable and let users have freedom on how concepts are checked in their program.
+This library is intended to be clear in syntex and reusable and let users have freedom on the style of their function.
 
 ## Structure of the repository.
 This library is header-only, so the structure of this repository quite simple.
