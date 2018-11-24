@@ -33,3 +33,6 @@
 
 # Assembly
 *.s
+
+# Ctags
+tags
